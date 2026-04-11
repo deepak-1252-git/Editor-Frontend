@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Convert Image | ToolNOVA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./static/base.css">
+    <link rel="stylesheet" href="./static/switch.css">
+    <link rel="stylesheet" href="./static/03_convert.css">
+    <script>
+        window.BACKEND_URL = "https://toolnova-gspe.onrender.com";
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./static/logo.png" alt="ToolNOVA Logo" class="nav-logo">
+        </div>
+        <h1>ToolNOVA</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="01_resize.html">Resize</a>
+            <a href="02_compress.html">Compress</a>
+            <a href="03_convert.html">Convert</a>
+            <a href="04_pdftool.html">PDF pro</a>
+            <a href="05_croprotate.html">Crop+Rotate</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <div class="convertor-wrapper">
+        <div class="main-card">
+            <div class="section-title text-center mb-4">
+                <h2 style="font-family: 'Montserrat'; font-weight: 800;">Universal Convertor</h2>
+                <p style="color: #94a3b8;">Transform your images into any format in seconds.</p>
+            </div>
+
+            <form id="convertForm">
+                <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-file-export fa-3x mb-3" style="color: var(--secondary);"></i>
+                    <h4 id="fileLabel">Select Multiple Images or Drag & Drop</h4>
+                    <p style="font-size: 0.8rem; color: #64748b;">JPG, PNG, WebP, GIF supported</p>
+                    <input type="file" id="fileInput" name="image" accept="image/*, .png, .pdf, .WebP, .GIF .docx, .txt" hidden multiple required>
+                </div>
+
+                <h5 class="mb-3">Select Output Format:</h5>
+                <div class="format-grid">
+                    <div class="format-option">
+                        <input type="radio" id="f1" name="type" value="png-to-jpg" checked>
+                        <label for="f1">JPG</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f2" name="type" value="jpg-to-png">
+                        <label for="f2">PNG</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f3" name="type" value="to-webp">
+                        <label for="f3">WebP</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f4" name="type" value="single_img_to_single_pdf">
+                        <label for="f4">Seperate PDF</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f5" name="type" value="multi_img_to_single_pdf">
+                        <label for="f5">Merge PDF</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f6" name="type" value="pdf-to-img">
+                        <label for="f6">PDF to IMG</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f7" name="type" value="to-gif">
+                        <label for="f7">GIF</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="convert-btn" id="submitBtn">Convert Files</button>
+            </form>
+
+            <div id="resultArea">
+                <h4 class="mb-3">✅ Conversion Complete</h4>
+                <div id="fileList"></div>
+                <div class="btn-reset mt-4">
+                    <a href="03_convert.html" style="color: var(--secondary); text-decoration: none;">↺ Convert More Files</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>ToolNOVA</strong>. Made with ❤️ for a better web.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/03_convert.js" ></script>
+</body>

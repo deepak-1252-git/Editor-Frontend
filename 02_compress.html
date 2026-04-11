@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compress Image | ToolNOVA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./static/base.css">
+    <link rel="stylesheet" href="./static/switch.css"> 
+    <link rel="stylesheet" href="./static/02_compress.css">
+    <script>
+        window.BACKEND_URL = "https://toolnova-gspe.onrender.com";
+    </script>
+</head> 
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./static/logo.png" alt="ToolNOVA Logo" class="nav-logo">
+        </div>
+        <h1>ToolNOVA</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="01_resize.html">Resize</a>
+            <a href="02_compress.html">Compress</a>
+            <a href="03_convert.html">Convert</a>
+            <a href="04_pdftool.html">PDF pro</a>
+            <a href="05_croprotate.html">Crop+Rotate</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <div class="compressor-wrapper">
+        <div class="main-card">
+            <div class="section-title">
+                <h2>Image Compressor</h2>
+                <p style="color: #94a3b8;">Shrink your images to the perfect size without losing detail.</p>
+            </div>
+
+            <form id="compressForm">
+                <div class="upload-box" onclick="document.getElementById('imageInput').click()">
+                    <i class="fas fa-file-image"></i>
+                    <h4 id="fileLabel">Choose Image or Drag & Drop</h4>
+                    <p id="fileSizeInfo" style="color: var(--secondary); font-size: 0.9rem; margin: 0;"></p>
+                    <input type="file" id="imageInput" name="image" accept="image/*" hidden required>
+                </div>
+    
+                <div class="control-panel">
+                    <label for="targetSize">Target File Size (KB)</label>
+                    <input type="number" id="targetSize" name="target_size" class="input-target" placeholder="Enter KB (e.g. 200)" required>
+                    <small style="color: #64748b; margin-top: 10px; display: block;">
+                        💡 Tip: Aim for 50-70% of original size for best quality.
+                    </small>
+                </div>
+
+                <button type="submit" class="compress-btn" id="submitBtn">
+                    <span id="btnText">Compress Now</span>
+                </button>
+            </form>
+
+            <div id="resultArea">
+                <div class="reduction-badge">
+                    🎉 Optimization Successful! Reduced by <span id="resRed">0</span>%
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <small>Original</small>
+                        <span id="resOrig">0 KB</span>
+                    </div>
+                    <div class="stat-card">
+                        <small>Compressed</small>
+                        <span id="resComp">0 KB</span>
+                    </div>
+                    <div class="stat-card">
+                        <small>Status</small>
+                        <span style="color: var(--success);">Optimized</span>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <a id="resDownload" href="#" class="btn-download">📥 Download Image</a>
+                    <a href="02_compress.html" class="btn-reset">↺ New File</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>ToolNOVA</strong>. Made with ❤️ for a better web.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/02_compress.js" ></script> 
+</body>
+ 

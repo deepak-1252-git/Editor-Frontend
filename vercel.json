@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/resizer", "destination": "/01_resize.html" },
+    { "source": "/compressor", "destination": "/02_compress.html" },
+    { "source": "/convertor", "destination": "/03_convert.html" },
+    { "source": "/pdf_tool", "destination": "/04_pdftool.html" },
+    { "source": "/crop_rotate", "destination": "/05_croprotate.html" }
+  ]
+}

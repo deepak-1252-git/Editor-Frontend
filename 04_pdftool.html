@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PDF Pro | ToolNOVA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="./static/base.css">
+    <link rel="stylesheet" href="./static/switch.css">
+    <link rel="stylesheet" href="./static/04_pdftool.css">
+    <script>
+        window.BACKEND_URL = "https://toolnova-gspe.onrender.com";
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./static/logo.png" alt="ToolNOVA Logo" class="nav-logo">
+        </div>
+        <h1>ToolNOVA</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="01_resize.html">Resize</a>
+            <a href="02_compress.html">Compress</a>
+            <a href="03_convert.html">Convert</a>
+            <a href="04_pdftool.html">PDF pro</a>
+            <a href="05_croprotate.html">Crop+Rotate</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+ 
+    <div class="pdf-wrapper">
+        <div class="main-card">
+            <div class="text-center mb-5">
+                <h2 style="font-family: 'Montserrat'; font-weight: 800;">PDF Master</h2>
+                <p style="color: #94a3b8;">Fast, Secure, and Client-Side PDF Processing.</p>
+            </div>
+
+            <form id="pdfForm">
+                <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-file-pdf fa-4x mb-3" style="color: var(--pdf-red);"></i>
+                    <h4 id="fileLabel">Select PDF Files or Drag & Drop</h4>
+                    <input type="file" id="fileInput" name="pdfs" multiple accept=".pdf" hidden required>
+                </div>
+
+                <div class="action-grid">
+                    <div class="action-card">
+                        <input type="radio" id="merge" name="type" value="merge-pdf" checked onclick="toggleExtras()">
+                        <label for="merge">Merge</label>
+                    </div>
+                    <div class="action-card">
+                        <input type="radio" id="split" name="type" value="split-pdf" onclick="toggleExtras()">
+                        <label for="split">Split</label>
+                    </div>
+                    <div class="action-card">
+                        <input type="radio" id="lock" name="type" value="lock-pdf" onclick="toggleExtras()">
+                        <label for="lock">Lock</label>
+                    </div>
+                </div>
+
+                <div id="splitInput">
+                    <input type="text" name="page" class="pdf-input" placeholder="Page number or range (e.g. 1-3)">
+                </div>
+                <div id="lockInput" style="position: relative;">
+                    <!-- <label class="tool-label">Set Password</label> -->
+                    <input type="password" name="password" id="pdfPassword" class="pdf-input" placeholder="Enter Password">
+                    <i class="fas fa-eye" id="togglePassword" 
+                    style="position: absolute; right: 15px; top: 16px; cursor: pointer; color: #94a3b8;"></i>
+                </div>
+
+                <button type="submit" class="btn-process mt-4" id="submitBtn">Process PDF</button>
+            </form>
+
+            <div id="resultArea">
+                <h4 class="mb-3">✅ Your PDF is Ready</h4>
+                <a id="downloadBtn" href="#" class="btn btn-light w-100 p-3" style="border-radius: 12px; font-weight: 700;">📥 Download Document</a>
+                <div class="btn-reset">
+                    <a href="04_pdftool.html" style="color: var(--secondary); text-decoration: none;">↺ New pdf</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>ToolNOVA</strong>. Made with ❤️ for a better web.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/04_pdftool.js"></script>
+</body>

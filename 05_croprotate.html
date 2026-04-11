@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop or Edit Image | ToolNOVA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css">
+
+    <link rel="stylesheet" href="./static/base.css">
+    <link rel="stylesheet" href="./static/switch.css">
+    <link rel="stylesheet" href="../static/05_croprotate.css">
+    <script>
+        window.BACKEND_URL = "https://toolnova-gspe.onrender.com";
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./static/logo.png" alt="ToolNOVA Logo" class="nav-logo">
+        </div>
+        <h1>ToolNOVA</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="01_resize.html">Resize</a>
+            <a href="02_compress.html">Compress</a>
+            <a href="03_convert.html">Convert</a>
+            <a href="04_pdftool.html">PDF pro</a>
+            <a href="05_croprotate.html">Crop+Rotate</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <div class="editor-wrapper">
+        <div class="image-box">
+            <img id="image" src="https://via.placeholder.com/800x600?text=Upload+an+Image+to+Start">
+        </div>
+        
+        <div class="control-section">
+            <h3>Photo Editor</h3>
+            
+            <div>
+                <label for="inputImage" class="custom-file-upload w-100">
+                    <i class="fas fa-upload"></i> 
+                    <span class="d-none d-md-inline">Choose File / Drag & Drop</span>
+                    <span class="d-inline d-md-none">Upload Image</span>
+                </label>
+                <input type="file" id="inputImage" accept="image/*" hidden>
+            </div>
+
+            <div>
+                <select id="aspectRatio" onchange="setAspectRatio(this.value)">
+                    <option value="NaN">Free Style/Aspect Ratio</option>
+                    <option value="1">1:1 Square</option>
+                    <option value="1.777">16:9 YouTube</option>
+                    <option value="0.562">9:16 Reels/TikTok</option>
+                    <option value="0.666">2:3 Portrait</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="tool-label">Transform Tools</label>
+                <div class="button-grid">
+                    <button class="btn-action" onclick="rotateLeft()"><i class="fas fa-undo"></i> Left</button>
+                    <button class="btn-action" onclick="rotateRight()"><i class="fas fa-redo"></i> Right</button>
+                    
+                    <button class="btn-action" onclick="flipHorizontal()"><i class="fas fa-arrows-alt-h"></i> Flip H</button>
+                    <button class="btn-action" onclick="flipVertical()"><i class="fas fa-arrows-alt-v"></i> Flip V</button>
+                    
+                    <button class="btn-action" onclick="cropper.zoom(0.1)"><i class="fas fa-search-plus"></i> In</button>
+                    <button class="btn-action" onclick="cropper.zoom(-0.1)"><i class="fas fa-search-minus"></i> Out</button>
+        
+                    <button class="btn-action btn-danger-outline" onclick="resetEditor()"><i class="fas fa-sync-alt"></i> Reset</button>
+                    <button class="btn-action btn-danger-outline" onclick="location.reload()"><i class="fas fa-file"></i> New File</button>
+                </div>
+            </div>
+                    
+            <button class="btn-tool btn-download" onclick="cropImage(this)">
+                <i class="fas fa-download me-2"></i> Save & Download
+            </button>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; flex-direction: column; align-items: center; justify-content: center; color: white;">
+        <div class="spinner"></div>
+        <p style="margin-top: 15px; font-weight: 500; letter-spacing: 1px;">OPTIMIZING IMAGE...</p>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>ToolNOVA</strong>. Made with ❤️ for a better web.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <script src="/static/05_croprotate.js"></script>
+</body>
