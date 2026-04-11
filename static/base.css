@@ -48,7 +48,7 @@ nav {
 .nav-logo {
     height: 40px; /* Logo ki height adjust karo */
     width: auto;
-    border-radius: 8px; /* Agar thoda round corners chahiye toh */
+    border-radius: 1px; /* Agar thoda round corners chahiye toh */
 }
 /* Mobile responsive ke liye */
 @media (max-width: 768px) {
