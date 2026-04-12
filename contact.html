@@ -1,0 +1,82 @@
+<style>
+    .contact-wrapper {
+        text-align: center; /* Heading aur P center karne ke liye */
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Gap thoda badha diya */
+        margin-top: 20px;
+    }
+
+    .contact-form input, .contact-form textarea {
+        width: 100%; /* Isse box pura bade dikhenge */
+        background: rgba(232, 7, 7, 0.05);
+        border: 1px ;
+        padding: 15px;
+        border-radius: 12px;
+        color: rgb(22, 22, 23);
+        font-family: 'Poppins', sans-serif;
+        outline: none;
+        transition: 0.3s;
+        box-sizing: border-box; 
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #ec5c77 0%, #8c2424 100%);
+        color: rgb(243, 237, 237);
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(3, 1, 5, 0.3);
+    }
+
+    .social-links {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+   .social-links a {
+    color: #131111;  
+    font-size: 2rem; 
+    transition: 0.3s;
+    }
+
+    .social-links a:hover {
+        color: #235db4;  
+        transform: scale(1.2);
+    }
+</style>
+<div class="contact-wrapper"> 
+    <h2>📩 Get In Touch</h2>
+    <p>Have a question or feedback? We'd love to hear from you.</p>
+
+    <form action="https://formspree.io/f/mwvaepap" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="How can we help?" rows="5" required></textarea>
+        <button type="submit" class="btn-submit">Send Message</button> 
+    </form>
+
+    <div class="social-links">
+        <a href="https://github.com/deepak-1252-git"><i class="fab fa-github"></i></a>
+        <a href="https://x.com/Aditya_Soni15"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/mr_deepak1252"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/deepak-bairwa-72a0b232a"><i class="fab fa-linkedin"></i></a>       
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
