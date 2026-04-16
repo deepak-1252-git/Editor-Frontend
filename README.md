@@ -60,9 +60,13 @@ Frontend/
 <p align="center">
   <img src="screenshots/home.png" width="80%" />
 </p>
+
+---
 <p align="center">
   <img src="screenshots/home2.png" width="80%" />
 </p>
+
+---
 <p align="center">
   <img src="screenshots/footer.png" width="80%" />
 </p>

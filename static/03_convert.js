@@ -30,13 +30,16 @@ document.getElementById('convertForm').onsubmit = async (e) => {
             
             data.files.forEach(file => {
                 // FIXED: Download link mein Backend URL add kiya hai loop ke andar
+                const isZip = file.name.toLowerCase().endsWith('.zip');
+                const buttonText = isZip ? 'Download All (ZIP)' : 'Download';
                 list.innerHTML += `
                     <div class="result-item">
                         <div class="d-flex align-items:center">
                             <span class="badge bg-primary me-3">${file.type}</span>
                             <span style="font-size:0.9rem">${file.name}</span>
                         </div>
-                        <a href="${window.BACKEND_URL}/download/${file.name}" class="btn-dl">Download</a>
+                        <a href="${window.BACKEND_URL}/download/${file.name}" class="btn-dl" id="download-link">${buttonText}</a>
+
                     </div>`;
             });
             

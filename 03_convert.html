@@ -51,7 +51,7 @@
                 <h5 class="mb-3">Select Output Format:</h5>
                 <div class="format-grid">
                     <div class="format-option">
-                        <input type="radio" id="f1" name="type" value="png-to-jpg" checked>
+                        <input type="radio" id="f1" name="type" value="png-to-jpg">
                         <label for="f1">JPG</label>
                     </div>
                     <div class="format-option">
@@ -63,6 +63,14 @@
                         <label for="f3">WebP</label>
                     </div>
                     <div class="format-option">
+                        <input type="radio" id="f10" name="type" value="to-bmp">
+                        <label for="f10">BMP</label>
+                    </div>
+                    <div class="format-option">
+                        <input type="radio" id="f8" name="type" value="to-gif">
+                        <label for="f8">GIF</label>
+                    </div>
+                    <div class="format-option">
                         <input type="radio" id="f4" name="type" value="single_img_to_single_pdf">
                         <label for="f4">Seperate PDF</label>
                     </div>
@@ -71,13 +79,18 @@
                         <label for="f5">Merge PDF</label>
                     </div>
                     <div class="format-option">
+                        <input type="radio" id="f9" name="type" value="html-to-pdf">
+                        <label for="f9">HTML to PDF</label>
+                    </div>
+                    <div class="format-option">
                         <input type="radio" id="f6" name="type" value="pdf-to-img">
                         <label for="f6">PDF to IMG</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f7" name="type" value="to-gif">
-                        <label for="f7">GIF</label>
+                        <input type="radio" id="f7" name="type" value="pdf-to-word">
+                        <label for="f7">PDF to Word</label>
                     </div>
+                    
                 </div>
 
                 <button type="submit" class="convert-btn" id="submitBtn">Convert Files</button>
