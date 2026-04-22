@@ -7,6 +7,56 @@ fileInput.onchange = () => {
     }
 };
 
+
+// Is event listener ko script ke end mein add karein
+document.getElementById('dropZone').addEventListener('click', function(e) {
+    const fileInput = document.getElementById('fileInput');
+    
+    if (this.classList.contains('is-disabled')) {
+        alert("Pehle format select kijiye!");
+    } else {
+        // Sirf tab trigger karein jab box enabled ho
+        fileInput.click();
+    }
+});
+
+// --- Optimize Enable Function ---
+function enableUpload(allowedType) {
+    const fileInput = document.getElementById('fileInput');
+    const dropZone = document.getElementById('dropZone');
+    const fileLabel = document.getElementById('fileLabel');
+
+    // 1. Box ko active karein
+    dropZone.classList.remove('is-disabled');
+    dropZone.style.opacity = "1";
+    dropZone.style.pointerEvents = "auto"; // CSS override ko force karein
+    
+    fileInput.disabled = false;
+
+    if (allowedType === 'image') {
+        fileInput.accept = "image/*"; 
+        fileLabel.innerText = "Select PNG, JPG, WebP, BMP, GIF Files";  
+    } 
+    else if (allowedType === 'html') {
+        fileInput.accept = ".html";
+        fileLabel.innerText = "Select .html Files";   
+    } 
+    else if (allowedType === 'pdf') {
+        fileInput.accept = ".pdf";
+        fileLabel.innerText = "Select .pdf Files";   
+    } 
+}
+
+// // Function jo check karega ki format select hai ya nahi
+// function triggerFileInput() {
+//     const fileInput = document.getElementById('fileInput');
+//     if (fileInput.disabled) {
+//         alert("Pehle format select kijiye!");
+//     } else {
+//         fileInput.click();
+//     }
+// }
+
 document.getElementById('convertForm').onsubmit = async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');

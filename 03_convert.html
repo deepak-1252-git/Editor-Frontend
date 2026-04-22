@@ -39,58 +39,56 @@
                 <h2 style="font-family: 'Montserrat'; font-weight: 800;">Universal Convertor</h2>
                 <p style="color: #94a3b8;">Transform your images into any format in seconds.</p>
             </div>
-
-            <form id="convertForm">
-                <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+                <form id="convertForm">
+                <div id="dropZone" class="upload-box is-disabled">
                     <i class="fas fa-file-export fa-3x mb-3" style="color: var(--secondary);"></i>
-                    <h4 id="fileLabel">Select Multiple Images or Drag & Drop</h4>
-                    <p style="font-size: 0.8rem; color: #64748b;">JPG, PNG, WebP, GIF supported</p>
-                    <input type="file" id="fileInput" name="image" accept="image/*, .png, .pdf, .WebP, .GIF, .BMP, .docx, .txt, .html" hidden multiple required>
+                    <h4 id="fileLabel">Please select a format first</h4>
+                    <p style="font-size: 0.8rem; color: #64748b;">Waiting for format selection...</p>
+                    <input type="file" id="fileInput" name="image" hidden multiple required disabled>
                 </div>
 
-                <h5 class="mb-3">Select Output Format:</h5>
+                <h5 class="mb-3">Select Output Format first</h5>
                 <div class="format-grid">
                     <div class="format-option">
-                        <input type="radio" id="f1" name="type" value="png-to-jpg">
+                        <input type="radio" id="f1" name="type" value="png-to-jpg" onclick="enableUpload('image')">
                         <label for="f1">JPG</label>
-                    </div>
+                    </div>        
                     <div class="format-option">
-                        <input type="radio" id="f2" name="type" value="jpg-to-png">
+                        <input type="radio" id="f2" name="type" value="jpg-to-png" onclick="enableUpload('image')">
                         <label for="f2">PNG</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f3" name="type" value="to-webp">
+                        <input type="radio" id="f3" name="type" value="to-webp" onclick="enableUpload('image')">
                         <label for="f3">WebP</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f10" name="type" value="to-bmp">
+                        <input type="radio" id="f10" name="type" value="to-bmp" onclick="enableUpload('image')">
                         <label for="f10">BMP</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f8" name="type" value="to-gif">
+                        <input type="radio" id="f8" name="type" value="to-gif" onclick="enableUpload('image')">
                         <label for="f8">GIF</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f4" name="type" value="single_img_to_single_pdf">
+                        <input type="radio" id="f4" name="type" value="single_img_to_single_pdf" onclick="enableUpload('image')">
                         <label for="f4">Seperate PDF</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f5" name="type" value="multi_img_to_single_pdf">
+                        <input type="radio" id="f5" name="type" value="multi_img_to_single_pdf" onclick="enableUpload('image')">
                         <label for="f5">Merge PDF</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f9" name="type" value="html-to-pdf">
+                        <input type="radio" id="f9" name="type" value="html-to-pdf" onclick="enableUpload('html')">
                         <label for="f9">HTML to PDF</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f6" name="type" value="pdf-to-img">
+                        <input type="radio" id="f6" name="type" value="pdf-to-img" onclick="enableUpload('pdf')">
                         <label for="f6">PDF to IMG</label>
                     </div>
                     <div class="format-option">
-                        <input type="radio" id="f7" name="type" value="pdf-to-word">
+                        <input type="radio" id="f7" name="type" value="pdf-to-word" onclick="enableUpload('pdf')">
                         <label for="f7">PDF to Word</label>
                     </div>
-                    
                 </div>
 
                 <button type="submit" class="convert-btn" id="submitBtn">Convert Files</button>
