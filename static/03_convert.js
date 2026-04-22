@@ -3,7 +3,7 @@ const fileInput = document.getElementById('fileInput');
 fileInput.onchange = () => {
     const count = fileInput.files.length;
     if (count > 0) {
-        document.getElementById('fileLabel').innerText = count > 1 ? `${count} Files Selected` : fileInput.files[0].name;
+        document.getElementById('fileLabel1').innerText = count > 1 ? `${count} Files Selected` : fileInput.files[0].name;
     }
 };
 
@@ -46,16 +46,6 @@ function enableUpload(allowedType) {
         fileLabel.innerText = "You can select .pdf Files";   
     } 
 }
-
-// // Function jo check karega ki format select hai ya nahi
-// function triggerFileInput() {
-//     const fileInput = document.getElementById('fileInput');
-//     if (fileInput.disabled) {
-//         alert("Pehle format select kijiye!");
-//     } else {
-//         fileInput.click();
-//     }
-// }
 
 document.getElementById('convertForm').onsubmit = async (e) => {
     e.preventDefault();
