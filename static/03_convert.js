@@ -39,11 +39,11 @@ function enableUpload(allowedType) {
     } 
     else if (allowedType === 'html') {
         fileInput.accept = ".html";
-        fileLabel.innerText = "Select .html Files";   
+        fileLabel.innerText = "You can select .html Files";   
     } 
     else if (allowedType === 'pdf') {
         fileInput.accept = ".pdf";
-        fileLabel.innerText = "Select .pdf Files";   
+        fileLabel.innerText = "You can select .pdf Files";   
     } 
 }
 
