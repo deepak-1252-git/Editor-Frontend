@@ -1,3 +1,4 @@
+let currentRequiredType = ""; // Global variable
 const fileInput = document.getElementById('fileInput');
 
 fileInput.onchange = () => {
@@ -7,34 +8,31 @@ fileInput.onchange = () => {
     }
 };
 
-
 // Is event listener ko script ke end mein add karein
 document.getElementById('dropZone').addEventListener('click', function(e) {
     const fileInput = document.getElementById('fileInput');
     
     if (this.classList.contains('is-disabled')) {
-        alert("Pehle format select kijiye!");
+        alert("Please select format first");
     } else {
-        // Sirf tab trigger karein jab box enabled ho
         fileInput.click();
     }
 });
 
 // --- Optimize Enable Function ---
 function enableUpload(allowedType) {
+    currentRequiredType = allowedType;
+
     const fileInput = document.getElementById('fileInput');
     const dropZone = document.getElementById('dropZone');
     const fileLabel = document.getElementById('fileLabel');
 
-
-    fileInput.value = "";  
-    fileLabel.innerText = "Select Files or Drag & Drop";
+    fileInput.value = ""; //???
     document.getElementById('resultArea').style.display = 'none';
-    // 1. Box ko active karein
+     
     dropZone.classList.remove('is-disabled');
     dropZone.style.opacity = "1";
-    dropZone.style.pointerEvents = "auto"; // CSS override ko force karein
-    
+    dropZone.style.pointerEvents = "auto";  
     fileInput.disabled = false;
 
     if (allowedType === 'image') {
@@ -43,20 +41,43 @@ function enableUpload(allowedType) {
     } 
     else if (allowedType === 'html') {
         fileInput.accept = ".html";
-        fileLabel.innerText = "You can select .html Files";   
+        fileLabel.innerText = "Please select .html Files";   
     } 
     else if (allowedType === 'pdf') {
         fileInput.accept = ".pdf";
-        fileLabel.innerText = "You can select .pdf Files";   
+        fileLabel.innerText = "Please select .pdf Files";   
     }
 }
 
 document.getElementById('convertForm').onsubmit = async (e) => {
     e.preventDefault();
+
+    if (fileInput.files.length === 0) {
+        alert("Plese select file first!");
+        return;
+    }
+
+    const fileName = fileInput.files[0].name;
+    const extension = fileName.split('.').pop().toLowerCase();
+
+    let isValid = false;
+    if (currentRequiredType === 'image') {
+        if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].includes(extension)) isValid = true;
+    } else if (currentRequiredType === 'html') {
+        if (extension === 'html') isValid = true;
+    } else if (currentRequiredType === 'pdf') {
+        if (extension === 'pdf') isValid = true;
+    }
+
+    if (!isValid){
+        alert(`Please select right formate or file! You selected "${currentRequiredType.toUpperCase()}" and file uploaded ".${extension}" `)
+        return;
+    }
+
     const btn = document.getElementById('submitBtn');
     btn.innerText = "Converting..."; 
     btn.disabled = true;
-
+    
     const formData = new FormData(e.target);
     
     try {
