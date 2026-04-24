@@ -70,7 +70,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
     }
 
     if (!isValid){
-        alert(`Please select right formate or file! You selected "${currentRequiredType.toUpperCase()}" and file uploaded ".${extension}" `)
+        alert(`Please select right formate or file! You selected "${currentRequiredType.toUpperCase()}" and file uploaded ".${extension}" `);
         return;
     }
 
