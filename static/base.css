@@ -3,13 +3,16 @@
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --glass-bg: rgba(248, 207, 207, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
+    /* ---------------------- */
+    --neon-cyan: #00f2fe;
+    --neon-purple: #818cf8;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     background: #0f0c29;
     /* Fallback */
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(6, 6, 6, 0.8)),url('./hero_bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(6, 6, 6, 0.8)), url('./hero_bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -17,7 +20,7 @@ body {
     min-height: 100vh;
 }
 
-/* Navbar: Fixed & Clean */
+/* ---------------Navbar---------------------*/
 nav {
     background: rgba(66, 61, 91, 0.05) !important;
     /* Darker for better contrast */
@@ -32,7 +35,6 @@ nav {
     position: sticky;
     top: 0;
     width: 100%;
-    /* vw ki jagah % use karo horizontal scroll se bachne ke liye */
     z-index: 1000;
     box-sizing: border-box;
 }
@@ -41,14 +43,18 @@ nav {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Logo aur text ke beech ka gap */
+    gap: 10px;
+    /* Logo aur text ke beech ka gap */
 }
 
 .nav-logo {
-    height: 40px; /* Logo ki height adjust karo */
+    height: 40px;
+    /* Logo ki height adjust karo */
     width: auto;
-    border-radius: 1px; /* Agar thoda round corners chahiye toh */
+    border-radius: 1px;
+    /* Agar thoda round corners chahiye toh */
 }
+
 /* Mobile responsive ke liye */
 @media (max-width: 768px) {
     .nav-logo {
@@ -113,6 +119,114 @@ nav a:hover {
     nav a {
         font-size: 0.75rem;
         padding: 5px 7px;
+    }
+}
+
+/* -------------------workflow------------------- */
+.workflow-container {
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Flex container to keep them side by side */
+.steps-flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mini-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 60px;
+    /* Pill Shape */
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 300px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    animation: slideInPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Sequential Pop-up Delays */
+.mini-card:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.mini-card:nth-child(2) {
+    animation-delay: 1.0s;
+}
+
+.mini-card:nth-child(3) {
+    animation-delay: 1.7s;
+}
+
+@keyframes slideInPop {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.mini-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--neon-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.1);
+}
+
+/* Small Number Circle */
+.num-dot {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.mini-card-content {
+    text-align: left;
+}
+
+.mini-card-content h4 {
+    color: white;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.mini-card-content p {
+    color: #94a3b8;
+    margin: 2px 0 0 0;
+    font-size: 0.85rem;
+}
+
+/* Mobile view adjustment */
+@media (max-width: 768px) {
+    .steps-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mini-card {
+        width: 100%;
+        max-width: 320px;
     }
 }
 
@@ -207,7 +321,7 @@ footer {
 
 .social-icons a {
     font-size: 1.5rem;
-    margin:  10px;
+    margin: 10px;
     color: #757d88;
     transition: 0.3s;
 }
