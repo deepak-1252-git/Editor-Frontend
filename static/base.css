@@ -124,11 +124,11 @@ nav a:hover {
 
 /* -------------------workflow------------------- */
 .workflow-container {
-    padding: 60px 20px;
+    padding: 80px 20px;
     font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
 }
 
-/* Flex container to keep them side by side */
 .steps-flex {
     display: flex;
     justify-content: center;
@@ -139,53 +139,50 @@ nav a:hover {
 }
 
 .mini-card {
-    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 60px;
-    /* Pill Shape */
     padding: 15px 25px;
     display: flex;
     align-items: center;
     gap: 15px;
     min-width: 300px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s ease;
+
     opacity: 0;
-    animation: slideInPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform: scale(0.8) translateY(40px);
+
+    will-change: transform, opacity;
+    transition:
+        opacity 0.6s ease-out,
+        transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Sequential Pop-up Delays */
-.mini-card:nth-child(1) {
-    animation-delay: 0.3s;
+.mini-card.animate-now {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
-.mini-card:nth-child(2) {
-    animation-delay: 1.0s;
+.mini-card.animate-now:nth-child(1) {
+    transition-delay: 0.2s;
 }
 
-.mini-card:nth-child(3) {
-    animation-delay: 1.7s;
+.mini-card.animate-now:nth-child(2) {
+    transition-delay: 0.7s;
 }
 
-@keyframes slideInPop {
-    0% {
-        opacity: 0;
-        transform: translateX(-30px) scale(0.9);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
+.mini-card.animate-now:nth-child(3) {
+    transition-delay: 1.2s;
 }
 
 .mini-card:hover {
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--neon-cyan);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.2);
 }
 
-/* Small Number Circle */
 .num-dot {
     width: 35px;
     height: 35px;
@@ -196,37 +193,25 @@ nav a:hover {
     justify-content: center;
     color: #000;
     font-weight: 800;
-    font-size: 0.9rem;
     flex-shrink: 0;
-}
-
-.mini-card-content {
-    text-align: left;
 }
 
 .mini-card-content h4 {
     color: white;
     margin: 0;
     font-size: 1.1rem;
-    font-weight: 600;
 }
 
 .mini-card-content p {
     color: #94a3b8;
-    margin: 2px 0 0 0;
+    margin: 0;
     font-size: 0.85rem;
 }
 
-/* Mobile view adjustment */
 @media (max-width: 768px) {
     .steps-flex {
         flex-direction: column;
         align-items: center;
-    }
-
-    .mini-card {
-        width: 100%;
-        max-width: 320px;
     }
 }
 
