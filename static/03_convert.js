@@ -53,7 +53,7 @@ function enableUpload(allowedType) {
 document.getElementById('convertForm').onsubmit = async (e) => {
     e.preventDefault();
 
-    if (!fileInput.files || fileInput.files.length === 0) {
+    if (fileInput.files.length === 0) {
         alert("Plese select file first!");
         return;
     }
