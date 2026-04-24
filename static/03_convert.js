@@ -26,6 +26,10 @@ function enableUpload(allowedType) {
     const dropZone = document.getElementById('dropZone');
     const fileLabel = document.getElementById('fileLabel');
 
+
+    fileInput.value = "";  
+    fileLabel.innerText = "Select Files or Drag & Drop";
+    document.getElementById('resultArea').style.display = 'none';
     // 1. Box ko active karein
     dropZone.classList.remove('is-disabled');
     dropZone.style.opacity = "1";
@@ -44,7 +48,7 @@ function enableUpload(allowedType) {
     else if (allowedType === 'pdf') {
         fileInput.accept = ".pdf";
         fileLabel.innerText = "You can select .pdf Files";   
-    } 
+    }
 }
 
 document.getElementById('convertForm').onsubmit = async (e) => {
