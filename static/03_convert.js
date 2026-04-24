@@ -3,12 +3,12 @@ const fileInput = document.getElementById('fileInput');
 
 fileInput.onchange = () => {
     const count = fileInput.files.length;
+    const label1 = document.getElementById('fileLabel1'); 
     if (count > 0) {
-        document.getElementById('fileLabel1').innerText = count > 1 ? `${count} Files Selected` : fileInput.files[0].name;
+        label1.innerText = count > 1 ? `${count} Files Selected` : fileInput.files[0].name;
     }
 };
 
-// Is event listener ko script ke end mein add karein
 document.getElementById('dropZone').addEventListener('click', function(e) {
     const fileInput = document.getElementById('fileInput');
     
@@ -23,13 +23,14 @@ document.getElementById('dropZone').addEventListener('click', function(e) {
 function enableUpload(allowedType) {
     currentRequiredType = allowedType;
 
-    const fileInput = document.getElementById('fileInput');
     const dropZone = document.getElementById('dropZone');
     const fileLabel = document.getElementById('fileLabel');
+    const label1 = document.getElementById('fileLabel1');
 
     fileInput.value = ""; //???
+    label1.innerText="Select or Drag & Drop another file";
+
     document.getElementById('resultArea').style.display = 'none';
-     
     dropZone.classList.remove('is-disabled');
     dropZone.style.opacity = "1";
     dropZone.style.pointerEvents = "auto";  
@@ -52,7 +53,7 @@ function enableUpload(allowedType) {
 document.getElementById('convertForm').onsubmit = async (e) => {
     e.preventDefault();
 
-    if (fileInput.files.length === 0) {
+    if (!fileInput.files || fileInput.files.length === 0) {
         alert("Plese select file first!");
         return;
     }
@@ -70,7 +71,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
     }
 
     if (!isValid){
-        alert(`Please select right formate or file! You selected "${currentRequiredType.toUpperCase()}" and file uploaded ".${extension}" `);
+        alert(`Wrong file! You selected "${currentRequiredType.toUpperCase()}" but file uploaded "${extension}" `);
         return;
     }
 
@@ -115,11 +116,12 @@ document.getElementById('convertForm').onsubmit = async (e) => {
         }
     } catch (error) {
         console.error(error);
-        alert("Backend connect nahi ho raha. Check karo Render service up hai ya nahi.");
+        alert("Backend connect nahi ho raha.");
     }
-    
-    btn.innerText = "Convert Files"; 
-    btn.disabled = false;
+    finally {
+        btn.innerText = "Convert Files"; 
+        btn.disabled = false;
+    } 
 };
 
 // --- Drag & Drop Logic (Same as before) ---
