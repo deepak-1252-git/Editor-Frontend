@@ -1,3 +1,30 @@
+function showToast(message, type = "info") {
+    let bgColor = "rgba(255, 255, 255, 0.05)";  
+    
+    if (type === "success") bgColor = "rgba(40, 167, 69, 0.2)";
+    if (type === "error") bgColor = "rgba(220, 53, 69, 0.2)";   
+    if (type === "warning") bgColor = "rgba(172, 192, 23, 0.2)";   
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true, 
+        // --- Custom Glass Effect Yahan Hai ---
+        style: {
+            background: bgColor,
+            backdropFilter: "blur(12px)",
+            webkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "12px",
+            color: "#faf8f8",
+            fontSize: "14px"
+        },
+    }).showToast();
+}
+// ------------------------------------
 let cropper;
 const image = document.getElementById('image');
 
@@ -47,6 +74,24 @@ function resetEditor() { if (cropper) cropper.reset(); }
 async function cropImage(btn) {
     if (!cropper) return;
 
+    const freshFileInput = document.getElementById('inputImage');
+    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+        showToast("Please select a file first!","warning");
+        return;
+    }
+
+    const fileName = inputImage.files[0].name;
+    const extension = fileName.split('.').pop().toLowerCase();
+
+    let isValid = false;
+    if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].includes(extension)){
+        isValid = true;
+    }
+    if (!isValid){
+        showToast(`wrong file uploaded "${extension}" `,"warning");
+        return;
+    }
+
     const overlay = document.getElementById('loadingOverlay');
     const downloadBtn = btn;
 
@@ -61,7 +106,7 @@ async function cropImage(btn) {
 
     canvas.toBlob(async (blob) => {
         if (!blob) {
-            console.error("Canvas empty hai!");
+            showToast("Canvas empty hai!","error");
             hideLoading(overlay, downloadBtn);
             return;
         }
@@ -70,26 +115,27 @@ async function cropImage(btn) {
         formData.append("image", blob, "cropped.jpg");
 
         try {
-            // FIXED: Backticks use kiye hain
+             
             let res = await fetch(`${window.BACKEND_URL}/crop_rotate`, {
                 method: 'POST',
                 body: formData
             });
 
             if (res.ok) {
+                showToast("Edit successful!", "success");
+
                 let data = await res.json();
                 
-                // FIXED: Download link mein Backend URL add kiya hai
                 window.location.href = `${window.BACKEND_URL}/download/${data.filename}`;
 
                 setTimeout(() => hideLoading(overlay, downloadBtn), 900);
             } else {
-                throw new Error("Server error!");
+                showToast("Server error!","error");
             }
 
         } catch (error) {
             console.error("Error:", error);
-            alert("Upload fail ho gaya! Check backend connection.");
+            showToast("Could not connect to Backend","error");
             hideLoading(overlay, downloadBtn);
         }
     }, 'image/jpeg', 0.95);

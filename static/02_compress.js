@@ -1,3 +1,30 @@
+function showToast(message, type = "info") {
+    let bgColor = "rgba(255, 255, 255, 0.05)";  
+    
+    if (type === "success") bgColor = "rgba(40, 167, 69, 0.2)";
+    if (type === "error") bgColor = "rgba(220, 53, 69, 0.2)";   
+    if (type === "warning") bgColor = "rgba(172, 192, 23, 0.2)";   
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true, 
+        // --- Custom Glass Effect Yahan Hai ---
+        style: {
+            background: bgColor,
+            backdropFilter: "blur(12px)",
+            webkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "12px",
+            color: "#faf8f8",
+            fontSize: "14px"
+        },
+    }).showToast();
+}
+// ----------------------------------------------------------
 const imageInput = document.getElementById('imageInput');
 const compressForm = document.getElementById('compressForm');
 
@@ -14,6 +41,25 @@ imageInput.addEventListener('change', function () {
 
 compressForm.onsubmit = async (e) => {
     e.preventDefault();
+
+    const freshFileInput = document.getElementById('imageInput');
+    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+        showToast("Please select a file first!","warning");
+        return;
+    }
+
+    const fileName = imageInput.files[0].name;
+    const extension = fileName.split('.').pop().toLowerCase();
+
+    let isValid = false;
+    if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].includes(extension)){
+        isValid = true;
+    }
+    if (!isValid){
+        showToast(`wrong file uploaded "${extension}" `,"error");
+        return;
+    }
+
     const btn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
 
@@ -30,6 +76,8 @@ compressForm.onsubmit = async (e) => {
         const data = await response.json();
 
         if (response.ok) {
+            showToast("Compressed successful!", "success");
+
             document.getElementById('resultArea').style.display = 'block';
             document.getElementById('resOrig').innerText = data.original_size;
             document.getElementById('resComp').innerText = data.compressed_size;
@@ -40,11 +88,11 @@ compressForm.onsubmit = async (e) => {
 
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         } else {
-            alert("Server Error: " + data.error);
+            showToast("Server Error: " + data.error , "error");
         }
     } catch (error) {
         console.error(error);
-        alert("Backend se connection nahi ho paya. Check karo Render live hai ya nahi.");
+        showToast("Could not connect to Backend!","error");
     }
 
     btnText.innerText = "Compress Now";

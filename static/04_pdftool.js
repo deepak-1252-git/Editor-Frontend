@@ -1,3 +1,30 @@
+ function showToast(message, type = "info") {
+    let bgColor = "rgba(255, 255, 255, 0.05)";  
+    
+    if (type === "success") bgColor = "rgba(40, 167, 69, 0.2)";
+    if (type === "error") bgColor = "rgba(220, 53, 69, 0.2)";   
+    if (type === "warning") bgColor = "rgba(172, 192, 23, 0.2)";   
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true, 
+        // --- Custom Glass Effect Yahan Hai ---
+        style: {
+            background: bgColor,
+            backdropFilter: "blur(12px)",
+            webkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "12px",
+            color: "#faf8f8",
+            fontSize: "14px"
+        },
+    }).showToast();
+}
+// ----------------------------------------------------------------
 function toggleExtras() {
     document.getElementById('splitInput').style.display = document.getElementById('split').checked ? 'block' : 'none';
     document.getElementById('lockInput').style.display = document.getElementById('lock').checked ? 'block' : 'none';
@@ -12,6 +39,25 @@ document.getElementById('fileInput').onchange = (e) => {
 
 document.getElementById('pdfForm').onsubmit = async (e) => {
     e.preventDefault();
+
+    const freshFileInput = document.getElementById('fileInput');
+    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+        showToast("Please select a file first!","warning");
+        return;
+    }
+
+    const fileName = fileInput.files[0].name;
+    const extension = fileName.split('.').pop().toLowerCase();
+
+    let isValid = false;
+    if (extension==='pdf'){
+        isValid = true;
+    }
+    if (!isValid){
+        showToast(`wrong file uploaded "${extension}" `,"error");
+        return;
+    }
+    
     const btn = document.getElementById('submitBtn');
     btn.innerText = "Processing..."; 
     btn.disabled = true;
@@ -28,17 +74,19 @@ document.getElementById('pdfForm').onsubmit = async (e) => {
         const data = await response.json();
 
         if (response.ok) {
+            showToast("Processed successful!", "success");
+
             document.getElementById('resultArea').style.display = 'block';
-            // FIXED: Download link mein Backend URL add kiya hai
+            
             document.getElementById('downloadBtn').href = `${window.BACKEND_URL}/download/${data.filename}`;
             
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         } else {
-            alert("Error: " + (data.error || "Processing failed"));
+            showToast("Error: " + (data.error || "Processing failed"),"error");
         }
     } catch (err) {
         console.error(err);
-        alert("Backend connect nahi ho raha. Make sure Render is awake!");
+        showToast("Could not connect to Backend!","error");
     }
     
     btn.innerText = "Process PDF"; 
