@@ -1,30 +1,3 @@
-function showToast(message, type = "info") {
-    let bgColor = "rgba(255, 255, 255, 0.05)";  
-    
-    if (type === "success") bgColor = "rgba(40, 167, 69, 0.2)";
-    if (type === "error") bgColor = "rgba(220, 53, 69, 0.2)";   
-    if (type === "warning") bgColor = "rgba(172, 192, 23, 0.2)";   
-
-    Toastify({
-        text: message,
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true, 
-        // --- Custom Glass Effect Yahan Hai ---
-        style: {
-            background: bgColor,
-            backdropFilter: "blur(12px)",
-            webkitBackdropFilter: "blur(12px)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-            borderRadius: "12px",
-            color: "#faf8f8",
-            fontSize: "14px"
-        },
-    }).showToast();
-}
-// ----------------------------------------------------------
 const imageInput = document.getElementById('imageInput');
 const compressForm = document.getElementById('compressForm');
 
