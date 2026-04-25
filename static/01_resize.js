@@ -33,12 +33,6 @@ document.getElementById('targetWidth').addEventListener('input', function() {
 uploadForm.onsubmit = async (e) => {
     e.preventDefault();
 
-    const freshFileInput = document.getElementById('fileInput');
-    if (!freshFileInput.files || freshFileInput.files.length === 0) {
-        alert("Plese select file first!");
-        return;
-    }
-
     const btn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     
@@ -71,10 +65,10 @@ uploadForm.onsubmit = async (e) => {
         console.error(err);
         alert("Could not connect to Backend!");
     }
-    finally {
-        btnText.innerText = "Process & Resize";
-        btn.disabled = false;
-    } 
+    
+    btnText.innerText = "Process & Resize";
+    btn.disabled = false;
+    
 };
 
 // --- Drag and Drop Logic (No changes needed here) ---

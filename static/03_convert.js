@@ -1,3 +1,20 @@
+function showToast(message, type = "info") {
+    let bgColor = "#333"; // Default dark
+    if (type === "success") bgColor = "linear-gradient(to right, #00b09b, #96c93d)";
+    if (type === "error") bgColor = "linear-gradient(to right, #ff5f6d, #ffc371)";
+    if (type === "warning") bgColor = "#ff9800";
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top", // top or bottom
+        position: "right", // left, center or right
+        stopOnFocus: true, 
+        style: { background: bgColor },
+    }).showToast();
+}
+// -----------------------
 let currentRequiredType = ""; // Global variable
 const fileInput = document.getElementById('fileInput');
 
@@ -13,7 +30,7 @@ document.getElementById('dropZone').addEventListener('click', function(e) {
     const fileInput = document.getElementById('fileInput');
     
     if (this.classList.contains('is-disabled')) {
-        alert("Please select format first");
+        showToast("Please select format first!", "warning");
     } else {
         fileInput.click();
     }
