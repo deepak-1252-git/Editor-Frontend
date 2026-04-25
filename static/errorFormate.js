@@ -1,9 +1,9 @@
  function showToast(message, type = "info") {
     let bgColor = "rgba(255, 255, 255, 0.05)";  
     
-    if (type === "success") bgColor = "rgba(11, 247, 66, 0.2)";
-    if (type === "error") bgColor = "rgba(249, 7, 31, 0.2)";   
-    if (type === "warning") bgColor = "rgba(225, 254, 4, 0.2)";   
+    if (type === "success") bgColor = "rgb(0, 255, 60)";
+    if (type === "error") bgColor = "rgb(255, 0, 25)";   
+    if (type === "warning") bgColor = "rgb(225, 254, 4)";   
 
     Toastify({
         text: message,

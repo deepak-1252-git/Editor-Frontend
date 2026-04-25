@@ -72,7 +72,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
     }
 
     if (!isValid){
-        showToast(`Wrong file! You selected "${currentRequiredType.toUpperCase()}" but file uploaded "${extension}" `,"error");
+        showToast(`Wrong file! File uploaded "${extension}" `,"error");
         return;
     }
 

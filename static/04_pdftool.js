@@ -66,7 +66,6 @@ document.getElementById('pdfForm').onsubmit = async (e) => {
     btn.disabled = false;
 };
 
-// Password Toggle logic (Ekdam sahi hai)
 const togglePassword = document.querySelector('#togglePassword');
 const password = document.querySelector('#pdfPassword');
 
