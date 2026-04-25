@@ -2,7 +2,7 @@ function showToast(message, type = "info") {
     let bgColor = "#333"; 
     if (type === "success") bgColor = "linear-gradient(to right, #00b09b, #96c93d)";
     if (type === "error") bgColor = "linear-gradient(to right, #ff5f6d, #ffc371)";
-    if (type === "warning") bgColor = "linear-gradient(to right, #c3aa07, #ff9800)";
+    if (type === "warning") bgColor = "linear-gradient(to right, #d12c23, #ff9800)";
 
     Toastify({
         text: message,

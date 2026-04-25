@@ -41,7 +41,6 @@ document.getElementById('targetWidth').addEventListener('input', function() {
             const ratio = img.height / img.width;
             const newHeight = Math.round(this.value * ratio);
             document.getElementById('targetHeight').value = newHeight;
-            URL.revokeObjectURL(img.src)
         }.bind(this);  
         img.src = URL.createObjectURL(file);
     }
