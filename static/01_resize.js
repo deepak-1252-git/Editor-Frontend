@@ -51,7 +51,7 @@ uploadForm.onsubmit = async (e) => {
 
     const freshFileInput = document.getElementById('fileInput');
     if (!freshFileInput.files || freshFileInput.files.length === 0) {
-        showToast("Plese select file first!","warning");
+        showToast("Please select a file first!","warning");
         return;
     }
 
