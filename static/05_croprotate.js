@@ -1,21 +1,24 @@
 let cropper;
 const image = document.getElementById('image');
-
-fileInput.onchange = () => {
-    const count = inputImage.files.length;
-    const label1 = document.getElementById('filelabel'); 
-    if (count > 0) {
-        label1.innerText = count > 1 ? `${count} Files Selected` : fileInput.files[0].name;
-    }
-};
-
-document.getElementById('inputImage').addEventListener('change', (e) => {
+const inputImage = document.getElementById('inputImage');
+const label1 = document.getElementById('filelabel');
+ 
+inputImage.addEventListener('change', (e) => {
     const file = e.target.files[0];
-    if (!file) return;
+    
+    const count = e.target.files.length;
+    if (count > 0) {
+        label1.querySelector('.custom-file-upload').innerText = e.target.files[0].name;
+    }
 
+    if (!file) return;
+ 
     const reader = new FileReader();
     reader.onload = function(event) {
-        if (cropper) { cropper.destroy(); }
+        if (cropper) { 
+            cropper.destroy(); 
+        }
+        
         image.src = event.target.result;
 
         cropper = new Cropper(image, {
@@ -36,18 +39,19 @@ document.getElementById('inputImage').addEventListener('change', (e) => {
     reader.readAsDataURL(file);
 });
 
-// --- Editor Functions ---
 function rotateRight() { if (cropper) cropper.rotate(90); }
 function rotateLeft() { if (cropper) cropper.rotate(-90); }
 function setAspectRatio(ratio) { if (cropper) cropper.setAspectRatio(parseFloat(ratio)); }
 
 let flipH = 1, flipV = 1;
 function flipHorizontal() {
-    flipH = flipH === 1 ? -1 : 1;
+    if (!cropper) return;
+    flipH = (flipH === 1) ? -1 : 1;
     cropper.scaleX(flipH);
 }
 function flipVertical() {
-    flipV = flipV === 1 ? -1 : 1;
+    if (!cropper) return;
+    flipV = (flipV === 1) ? -1 : 1;
     cropper.scaleY(flipV);
 }
 function resetEditor() { if (cropper) cropper.reset(); }
