@@ -1,15 +1,15 @@
 function showToast(message, type = "info") {
-    let bgColor = "#333"; // Default dark
+    let bgColor = "#333"; 
     if (type === "success") bgColor = "linear-gradient(to right, #00b09b, #96c93d)";
     if (type === "error") bgColor = "linear-gradient(to right, #ff5f6d, #ffc371)";
-    if (type === "warning") bgColor = "#ff9800";
+    if (type === "warning") bgColor = "linear-gradient(to right, #c3aa07, #ff9800)";
 
     Toastify({
         text: message,
         duration: 3000,
         close: true,
-        gravity: "top", // top or bottom
-        position: "right", // left, center or right
+        gravity: "top",  
+        position: "right",  
         stopOnFocus: true, 
         style: { background: bgColor },
     }).showToast();
@@ -72,7 +72,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
 
     const freshFileInput = document.getElementById('fileInput');
     if (!freshFileInput.files || freshFileInput.files.length === 0) {
-        alert("Plese select file first!");
+        showToast("Plese select file first!","warning");
         return;
     }
 
@@ -89,7 +89,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
     }
 
     if (!isValid){
-        alert(`Wrong file! You selected "${currentRequiredType.toUpperCase()}" but file uploaded "${extension}" `);
+        showToast(`Wrong file! You selected "${currentRequiredType.toUpperCase()}" but file uploaded "${extension}" `,"error");
         return;
     }
 
@@ -100,7 +100,6 @@ document.getElementById('convertForm').onsubmit = async (e) => {
     const formData = new FormData(e.target);
     
     try {
-        // FIXED: Backticks (`) ka use kiya gaya hai
         const response = await fetch(`${window.BACKEND_URL}/convertor`, { 
             method: 'POST', 
             body: formData 
@@ -109,11 +108,11 @@ document.getElementById('convertForm').onsubmit = async (e) => {
         const data = await response.json();
 
         if (response.ok) {
+            showToast("Conversion successful!", "success");
             const list = document.getElementById('fileList');
             list.innerHTML = '';
             
             data.files.forEach(file => {
-                // FIXED: Download link mein Backend URL add kiya hai loop ke andar
                 const isZip = file.name.toLowerCase().endsWith('.zip');
                 const buttonText = isZip ? 'Download All (ZIP)' : 'Download';
                 list.innerHTML += `
@@ -130,11 +129,11 @@ document.getElementById('convertForm').onsubmit = async (e) => {
             document.getElementById('resultArea').style.display = 'block';
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         } else {
-            alert("Conversion failed: " + (data.error || "Unknown error"));
+            showToast("Conversion failed: " + (data.error || "Unknown error"),"error");
         }
     } catch (error) {
         console.error(error);
-        alert("Backend connect nahi ho raha.");
+        showToast("Backend is not connecting!.","error");
     }
     finally {
         btn.innerText = "Convert Files"; 

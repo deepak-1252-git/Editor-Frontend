@@ -1,7 +1,23 @@
+function showToast(message, type = "info") {
+    let bgColor = "#333"; 
+    if (type === "success") bgColor = "linear-gradient(to right, #00b09b, #96c93d)";
+    if (type === "error") bgColor = "linear-gradient(to right, #ff5f6d, #ffc371)";
+    if (type === "warning") bgColor = "linear-gradient(to right, #c3aa07, #ff9800)";
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: true,
+        gravity: "top",  
+        position: "right",  
+        stopOnFocus: true, 
+        style: { background: bgColor },
+    }).showToast();
+}
+// ---------------------------------------------------
 const fileInput = document.getElementById('fileInput');
 const uploadForm = document.getElementById('uploadForm');
 
-// Pre-fill width/height on selection
 fileInput.addEventListener('change', function() {
     const file = this.files[0];
     if (file) {
@@ -11,6 +27,7 @@ fileInput.addEventListener('change', function() {
             document.getElementById('fileSizeDisplay').innerText = `Original: ${img.width}x${img.height}px`;
             document.getElementById('targetWidth').value = Math.round(img.width * 0.5);
             document.getElementById('targetHeight').value = Math.round(img.height * 0.5);
+            URL.revokeObjectURL(img.src)
         };
         img.src = URL.createObjectURL(file);
     }
@@ -24,14 +41,32 @@ document.getElementById('targetWidth').addEventListener('input', function() {
             const ratio = img.height / img.width;
             const newHeight = Math.round(this.value * ratio);
             document.getElementById('targetHeight').value = newHeight;
-        }.bind(this); // 'this' yahan targetWidth input hai
+            URL.revokeObjectURL(img.src)
+        }.bind(this);  
         img.src = URL.createObjectURL(file);
     }
 });
 
-// Handle Form Submission
 uploadForm.onsubmit = async (e) => {
     e.preventDefault();
+
+    const freshFileInput = document.getElementById('fileInput');
+    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+        showToast("Plese select file first!","warning");
+        return;
+    }
+
+    const fileName = fileInput.files[0].name;
+    const extension = fileName.split('.').pop().toLowerCase();
+
+    let isValid = false;
+    if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].includes(extension)){
+        isValid = true;
+    }
+    if (!isValid){
+        showToast(`wrong file uploaded "${extension}" `,"error");
+        return;
+    }
 
     const btn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
@@ -51,6 +86,8 @@ uploadForm.onsubmit = async (e) => {
         const data = await response.json();
 
         if (response.ok) {
+            showToast("Conversion successful!", "success");
+
             document.getElementById('resultArea').style.display = 'block';
             document.getElementById('resImg').src = `${window.BACKEND_URL}/outputs/${data.filename}`;
             document.getElementById('resRes').innerText = `${data.resolution[0]} x ${data.resolution[1]} px`;
@@ -59,11 +96,11 @@ uploadForm.onsubmit = async (e) => {
             
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         } else {
-            alert("Backend error: " + (data.error || "Something went wrong!"));
+            showToast("Backend error: " + (data.error || "Something went wrong!"),"error");
         }
     } catch (err) {
         console.error(err);
-        alert("Could not connect to Backend!");
+        showToast("Could not connect to Backend!","error");
     }
     
     btnText.innerText = "Process & Resize";
