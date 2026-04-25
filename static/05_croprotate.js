@@ -57,13 +57,9 @@ function flipVertical() {
 function resetEditor() { if (cropper) cropper.reset(); }
 
 async function cropImage(btn) {
-    if (!cropper) return;
-
-    const freshFileInput = document.getElementById('inputImage');
-    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+    if (!cropper)
         showToast("Please select a file first!","warning");
         return;
-    }
 
     const fileName = inputImage.files[0].name;
     const extension = fileName.split('.').pop().toLowerCase();
