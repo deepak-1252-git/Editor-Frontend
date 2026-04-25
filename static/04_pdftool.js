@@ -13,12 +13,6 @@ document.getElementById('fileInput').onchange = (e) => {
 document.getElementById('pdfForm').onsubmit = async (e) => {
     e.preventDefault();
 
-    const freshFileInput = document.getElementById('fileInput');
-    if (!freshFileInput.files || freshFileInput.files.length === 0) {
-        showToast("Please select a file first!","warning");
-        return;
-    }
-
     const fileName = fileInput.files[0].name;
     const extension = fileName.split('.').pop().toLowerCase();
 
@@ -38,7 +32,7 @@ document.getElementById('pdfForm').onsubmit = async (e) => {
     const formData = new FormData(e.target);
     
     try {
-        // FIXED: Backticks (`) use kiye hain
+        
         const response = await fetch(`${window.BACKEND_URL}/pdf_tool`, { 
             method: 'POST', 
             body: formData 

@@ -11,14 +11,7 @@ fileInput.onchange = () => {
 
 document.getElementById('inputImage').addEventListener('change', (e) => {
     const file = e.target.files[0];
-
-    const freshFileInput = document.getElementById('inputImage');
-    if (!freshFileInput.files || freshFileInput.files.length === 0) {
-        showToast("Please select a file first!","warning");
-        return;
-    }
-
-    // if (!file) return;
+    if (!file) return;
 
     const reader = new FileReader();
     reader.onload = function(event) {
@@ -60,7 +53,7 @@ function flipVertical() {
 function resetEditor() { if (cropper) cropper.reset(); }
 
 async function cropImage(btn) {
-    // if (!cropper) return;
+    if (!cropper) return;
 
     const freshFileInput = document.getElementById('inputImage');
     if (!freshFileInput.files || freshFileInput.files.length === 0) {
