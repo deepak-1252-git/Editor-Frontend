@@ -1,4 +1,4 @@
- const fileInput = document.getElementById('fileInput');
+const fileInput = document.getElementById('fileInput');
 const pdfForm = document.getElementById('pdfForm');
 const splitInputField = document.querySelector('input[name="page"]');
 const lockInputField = document.querySelector('input[name="password"]');
@@ -83,7 +83,6 @@ if (togglePassword && password) {
 
 // --- Drag & Drop logic ---
 const uploadBox = document.querySelector('.upload-box');
-const fileInput = document.getElementById('fileInput');
 
 uploadBox.addEventListener('dragover', (e) => {
     e.preventDefault();

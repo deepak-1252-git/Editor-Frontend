@@ -134,7 +134,6 @@ function hideLoading(overlay, btn) {
 
 // --- Drag & Drop logic ---
 const uploadBox = document.querySelector('.image-box');
-const inputImage = document.getElementById('inputImage');
 
 if (uploadBox) {
     uploadBox.addEventListener('dragover', (e) => {
