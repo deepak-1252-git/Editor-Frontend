@@ -32,6 +32,13 @@ document.getElementById('targetWidth').addEventListener('input', function() {
 // Handle Form Submission
 uploadForm.onsubmit = async (e) => {
     e.preventDefault();
+
+    const freshFileInput = document.getElementById('fileInput');
+    if (!freshFileInput.files || freshFileInput.files.length === 0) {
+        alert("Plese select file first!");
+        return;
+    }
+
     const btn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     
@@ -62,11 +69,12 @@ uploadForm.onsubmit = async (e) => {
         }
     } catch (err) {
         console.error(err);
-        alert("Could not connect to Backend. Make sure Render is awake!");
+        alert("Could not connect to Backend!");
     }
-
-    btnText.innerText = "Process & Resize";
-    btn.disabled = false;
+    finally {
+        btnText.innerText = "Process & Resize";
+        btn.disabled = false;
+    } 
 };
 
 // --- Drag and Drop Logic (No changes needed here) ---
