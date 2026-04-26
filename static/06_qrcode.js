@@ -13,7 +13,7 @@ async function generateQR() {
     btn.style.opacity = "0.7";
 
     try {
-        const response = await fetch('${window.BACKEND_URL}/generate_qr', {
+        const response = await fetch(`${window.BACKEND_URL}/generate_qr`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

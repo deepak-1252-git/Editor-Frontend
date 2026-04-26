@@ -11,7 +11,9 @@ inputImage.addEventListener('change', (e) => {
         label1.querySelector('.custom-file-upload').innerText = e.target.files[0].name;
     }
 
-    if (!file) return;
+    if (!file)
+        showToast("Please  a file first!","warning"); 
+        return;
  
     const reader = new FileReader();
     reader.onload = function(event) {
