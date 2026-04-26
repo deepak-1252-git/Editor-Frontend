@@ -55,6 +55,13 @@
                     <label>Background Color</label>
                     <input type="color" id="qrBgColor" value="#ffffff" style="height: 45px; padding: 5px;">
                 </div>
+                <div class="input-group">
+                    <label>QR Design Style</label>
+                    <select id="qrType" style="height: 45px; padding: 5px;">
+                        <option value="square">Classic Square</option>
+                        <option value="rounded" selected>Modern Rounded</option>
+                    </select>
+                </div>
             </div>
 
             <button class="resize-btn" onclick="generateQR()">GENERATE QR CODE</button>
@@ -69,7 +76,7 @@
                         <div class="info-badge">Status: Ready to Download</div>
                         <div style="display: flex; gap: 10px;">
                             <a id="qrDownload" class="download-link" href="#" download>Download Now</a>
-                            <a href="javascript:location.reload()" class="btn-reset" style="margin-top: 15px; display: inline-block;">Reset</a>
+                            <a href="06_qrcode.html" class="btn-reset" style="margin-top: 15px; display: inline-block;">Reset</a>
                         </div>
                     </div>
                 </div>

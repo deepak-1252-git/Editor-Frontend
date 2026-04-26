@@ -2,6 +2,7 @@ async function generateQR() {
     const text = document.getElementById('qrText').value;
     const color = document.getElementById('qrColor').value;
     const bgColor = document.getElementById('qrBgColor').value;
+    const qrType = document.getElementById('qrType').value;
     const btn = document.querySelector('.resize-btn');
 
     if (!text) {
@@ -19,7 +20,8 @@ async function generateQR() {
             body: JSON.stringify({ 
                 text: text,
                 color: color,
-                bg_color: bgColor
+                bg_color: bgColor,     
+                qr_type: qrType   
             })
         });
 
