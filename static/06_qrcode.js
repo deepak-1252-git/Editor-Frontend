@@ -22,7 +22,6 @@ async function generateQR() {
     try {
         const response = await fetch(`${window.BACKEND_URL}/generate_qr`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: formData   
         });
 

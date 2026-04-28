@@ -35,7 +35,7 @@
         </div>
     </nav>
     
-    <div class="resizer-wrapper">
+    <div class="qr-wrapper">
         <div class="main-card">
             <div class="section-title">
                 <h2>Pro QR Generator</h2>
@@ -47,19 +47,31 @@
                 <input type="text" id="qrText" placeholder="https://toolnovax.vercel.app/">
             </div>
 
-            <div class="controls-grid">
-                <div class="input-group">
+
+            <div class="color-selection-box">
+                <div class="color-item">
+                    <div class="color-circle-wrapper">
+                        <input type="color" id="qrColor" value="#6366f1">
+                    </div>
                     <label>QR Color</label>
-                    <input type="color" id="qrColor" value="#6366f1" style="height: 45px; padding: 5px;">
                 </div>
-                <div class="input-group">
-                    <label>Background Color</label>
-                    <input type="color" id="qrBgColor" value="#ffffff" style="height: 45px; padding: 5px;">
+                
+                <div class="color-item">
+                    <div class="color-circle-wrapper">
+                        <input type="color" id="qrGradient" value="#00d4ff">
+                    </div>
+                    <label>Gradient</label>
                 </div>
-                <div class="input-group">
-                    <label>Gradient (Optional)</label>
-                    <input type="color" id="qrGradient" value="#00d4ff">
+                
+                <div class="color-item">
+                    <div class="color-circle-wrapper">
+                        <input type="color" id="qrBgColor" value="#ffffff">
+                    </div>
+                    <label>Background</label>
                 </div>
+            </div>
+
+            <div class="controls-grid">
                 <div class="input-group">
                     <label>QR Style</label>
                     <select id="qrType" style="height: 45px; padding: 5px;">
@@ -73,7 +85,7 @@
                 </div>
             </div>
 
-            <button class="resize-btn" onclick="generateQR()">Generate QR Code</button>
+            <button class="qr-btn" onclick="generateQR()">Generate QR Code</button>
 
             <div id="resultArea">
                 <div class="result-card">
