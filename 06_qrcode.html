@@ -38,7 +38,7 @@
     <div class="resizer-wrapper">
         <div class="main-card">
             <div class="section-title">
-                <h2>QR Code Generator</h2>
+                <h2>Pro QR Generator</h2>
                 <p style="color: #94a3b8;">Create custom high-quality QR codes</p>
             </div>
 
@@ -50,22 +50,30 @@
             <div class="controls-grid">
                 <div class="input-group">
                     <label>QR Color</label>
-                    <input type="color" id="qrColor" value="#000000" style="height: 45px; padding: 5px;">
+                    <input type="color" id="qrColor" value="#6366f1" style="height: 45px; padding: 5px;">
                 </div>
                 <div class="input-group">
                     <label>Background Color</label>
                     <input type="color" id="qrBgColor" value="#ffffff" style="height: 45px; padding: 5px;">
                 </div>
                 <div class="input-group">
-                    <label>QR Design Style</label>
+                    <label>Gradient (Optional)</label>
+                    <input type="color" id="qrGradient" value="#00d4ff">
+                </div>
+                <div class="input-group">
+                    <label>QR Style</label>
                     <select id="qrType" style="height: 45px; padding: 5px;">
-                        <option value="square">Classic Square</option>
-                        <option value="rounded">Modern Rounded</option>
+                        <option value="square">Square</option>
+                        <option value="rounded">Rounded</option>
                     </select>
+                </div>
+                <div class="input-group">
+                    <label>Add Logo (Optional)</label>
+                    <input type="file" id="qrLogo" accept="image/*" style="padding: 8px;">
                 </div>
             </div>
 
-            <button class="resize-btn" onclick="generateQR()">GENERATE QR CODE</button>
+            <button class="resize-btn" onclick="generateQR()">Generate QR Code</button>
 
             <div id="resultArea">
                 <div class="result-card">

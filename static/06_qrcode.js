@@ -1,16 +1,21 @@
 async function generateQR() {
-    const text = document.getElementById('qrText').value;
-    const color = document.getElementById('qrColor').value;
-    const bgColor = document.getElementById('qrBgColor').value;
-    const qrType = document.getElementById('qrType').value;
+    const formData = new FormData();
+    formData.append('text', document.getElementById('qrText').value);
+    formData.append('color', document.getElementById('qrColor').value);
+    formData.append('gradient_color', document.getElementById('qrGradient').value);
+    formData.append('bg_color', document.getElementById('qrBgColor').value);
+    formData.append('qr_type', document.getElementById('qrType').value);
+    
+    const logoFile = document.getElementById('qrLogo').files[0];
     const btn = document.querySelector('.resize-btn');
 
-    if (!text) {
-        showToast("Please enter text or a URL");
-        return;
+    if (logoFile) {
+        formData.append('logo', logoFile);
     }
 
-    btn.innerText = "GENERATING...";
+    if (!document.getElementById('qrText').value) return showToast("Text or URL is required!");
+
+    btn.innerText = "Generating...";
     btn.style.opacity = "0.7";
     btn.disabled = true;
 
@@ -18,12 +23,7 @@ async function generateQR() {
         const response = await fetch(`${window.BACKEND_URL}/generate_qr`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                text: text,
-                color: color,
-                bg_color: bgColor,     
-                qr_type: qrType   
-            })
+            body: formData   
         });
 
         const data = await response.json();
@@ -40,7 +40,9 @@ async function generateQR() {
             document.getElementById('resultArea').style.display = 'block';
             
             // Scroll to result
-            document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         }
         else if (data.error) {
             showToast("Server Error: " + data.error);
