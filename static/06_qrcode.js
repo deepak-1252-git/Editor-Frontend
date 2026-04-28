@@ -7,7 +7,7 @@ async function generateQR() {
     formData.append('qr_type', document.getElementById('qrType').value);
     
     const logoFile = document.getElementById('qrLogo').files[0];
-    const btn = document.querySelector('.resize-btn');
+    const btn = document.querySelector('.qr-btn');
 
     if (logoFile) {
         formData.append('logo', logoFile);
