@@ -18,12 +18,13 @@ body {
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* ---------------Navbar---------------------*/
 nav {
     background: rgba(66, 61, 91, 0.05) !important;
-    /* Darker for better contrast */
+     
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
