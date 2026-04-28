@@ -40,7 +40,6 @@ nav {
     box-sizing: border-box;
 }
 
- 
 .logo-container {
     display: flex;
     align-items: center;
@@ -50,7 +49,6 @@ nav {
 
 .nav-logo {
     height: 40px;
-     
     width: auto;
     border-radius: 1px;
      
@@ -215,15 +213,15 @@ nav a:hover {
 
 /*--------------- Footer Styling--------------------- */
 footer {
-    margin-top: 100px;
+    margin-top: 50px;
     background: rgba(21, 34, 62, 0.8);  
     /* Dark Glass Effect */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 60px 0 30px;
+    padding: 60px 0 10px;
     color: #94a3b8;
-    width: 100vw;
+    width: 100%;
 }
 
 .footer-container {
