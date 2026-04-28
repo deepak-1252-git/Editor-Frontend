@@ -51,14 +51,16 @@
     }
     
    .social-links a {
-    color: #131111;  
+    color: #8a8a8a;  
     font-size: 2rem; 
     transition: 0.3s;
     }
 
-    .social-links a:hover {
-        color: #235db4;  
-        transform: scale(1.2);
+    .social-links {
+        & .github:hover { color: #000000; transform: scale(1.2); }
+        & .twitter:hover { color: #000000; transform: scale(1.2); }
+        & .insta:hover { color: #ff0055; transform: scale(1.2); }
+        & .linkedin:hover { color: #235db4; transform: scale(1.2); }
     }
 </style>
 <div class="contact-wrapper"> 
@@ -73,10 +75,10 @@
     </form>
 
     <div class="social-links">
-        <a href="https://github.com/deepak-1252-git"><i class="fab fa-github"></i></a>
-        <a href="https://x.com/Aditya_Soni15"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.instagram.com/mr_deepak1252"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/deepak-bairwa-72a0b232a"><i class="fab fa-linkedin"></i></a>       
+        <a href="https://github.com/deepak-1252-git"><i class="fab fa-github github"></i></a>
+        <a href="https://x.com/Deepak_1252"><i class="fab fa-twitter twitter"></i></a>
+        <a href="https://instagram.com/mr_deepak1252"><i class="fab fa-instagram insta"></i></a>
+        <a href="https://linkedin.com/in/deepak-bairwa-72a0b232a"><i class="fab fa-linkedin linkedin"></i></a>       
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>

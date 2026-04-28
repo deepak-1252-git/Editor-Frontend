@@ -59,8 +59,8 @@
 /* Glassmorphism Cards */
 .card {
     background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 40px 25px;
     border-radius: 28px;
     border: 1px solid var(--border);

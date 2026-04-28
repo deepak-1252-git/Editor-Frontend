@@ -37,7 +37,6 @@ ToolNovaX frontend is a static web interface that provides multiple utility tool
 
 ## 📁 Project Structure
 
-
 Frontend/
 ├── static/
 ├── index.html
@@ -94,6 +93,11 @@ Frontend/
 ### ✂️ Crop & Rotate
 <p align="center">
   <img src="screenshots/editimage.png" width="80%" />
+</p>
+
+### 🏁 QR Maker
+<p align="center">
+  <img src="screenshots/qrmaker.png" width="80%" />
 </p>
 
 ### ✅ Contact

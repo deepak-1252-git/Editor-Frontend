@@ -12,7 +12,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #0f0c29;
     /* Fallback */
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(6, 6, 6, 0.8)), url('./hero_bg.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(6, 6, 6, .7)), url('./hero_bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -39,23 +39,22 @@ nav {
     box-sizing: border-box;
 }
 
-/* Logo styling */
+ 
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Logo aur text ke beech ka gap */
+     
 }
 
 .nav-logo {
     height: 40px;
-    /* Logo ki height adjust karo */
+     
     width: auto;
     border-radius: 1px;
-    /* Agar thoda round corners chahiye toh */
+     
 }
 
-/* Mobile responsive ke liye */
 @media (max-width: 768px) {
     .nav-logo {
         height: 30px;
@@ -73,20 +72,19 @@ nav h1 {
     /* Logo ko dabne mat do */
 }
 
-/* Links Container */
 .nav-links {
     display: flex;
     gap: 10px;
-    /* Links ke beech automatic gap */
+     
     flex-wrap: nowrap;
-    /* Mobile par overlap rokne ke liye */
+     
     overflow-x: auto;
-    /* Agar screen choti ho toh scroll ho jaye, chadhne ki jagah */
+     
     padding-left: 10px;
 }
 
 nav a {
-    color: #22c55e;
+    color: #10db5b;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
@@ -98,7 +96,6 @@ nav a {
 }
 
 nav a:hover {
-    background: rgba(34, 197, 94, 0.1);
     color: white;
 }
 
@@ -218,7 +215,7 @@ nav a:hover {
 /*--------------- Footer Styling--------------------- */
 footer {
     margin-top: 100px;
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(21, 34, 62, 0.8);  
     /* Dark Glass Effect */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -305,13 +302,30 @@ footer {
 }
 
 .social-icons a {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 10px;
-    color: #757d88;
+    color: #f5f5f6;
     transition: 0.3s;
 }
 
-.social-icons a:hover {
-    color: white;
-    transform: scale(1.2);
+.social-icons {
+    & .github:hover {
+        color: #000000;
+        transform: scale(1.2);
+    }
+
+    & .twitter:hover {
+        color: #000000;
+        transform: scale(1.2);
+    }
+
+    & .insta:hover {
+        color: #ff0055;
+        transform: scale(1.2);
+    }
+
+    & .linkedin:hover {
+        color: #0066ff;
+        transform: scale(1.2);
+    }
 }
