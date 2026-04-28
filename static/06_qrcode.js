@@ -12,6 +12,7 @@ async function generateQR() {
 
     btn.innerText = "GENERATING...";
     btn.style.opacity = "0.7";
+    btn.disabled = true;
 
     try {
         const response = await fetch(`${window.BACKEND_URL}/generate_qr`, {
@@ -30,17 +31,26 @@ async function generateQR() {
         if (data.filename) {
             
             const imgPath = `${window.BACKEND_URL}/download/${data.filename}`;
-            document.getElementById('qrPreview').src = imgPath;
+            const timestamp = new Date().getTime();
+
+            const qrPreview = document.getElementById('qrPreview');
+            qrPreview.src = `${imgPath}?t=${timestamp}`;
+            
             document.getElementById('qrDownload').href = imgPath;
             document.getElementById('resultArea').style.display = 'block';
             
             // Scroll to result
             document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
         }
+        else if (data.error) {
+            showToast("Server Error: " + data.error);
+        }
     } catch (error) {
+        console.error(error);
         showToast("Something went wrong!");
     } finally {
         btn.innerText = "GENERATE QR CODE";
         btn.style.opacity = "1";
+        btn.disabled = false;
     }
 }
