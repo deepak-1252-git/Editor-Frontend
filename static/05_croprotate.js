@@ -2,67 +2,42 @@ let cropper;
 const image = document.getElementById('image');
 const inputImage = document.getElementById('inputImage');
 const label1 = document.getElementById('filelabel');
- 
+
 inputImage.addEventListener('change', (e) => {
     const file = e.target.files[0];
-    
+
     if (!file){
         showToast("Please  a file first!"); 
         return;
     }
-    
-    const count = e.target.files.length;
-    if (count > 0) {
-        label1.querySelector('.custom-file-upload').innerText = e.target.files[0].name;
-    }
+
+    label1.querySelector('.custom-file-upload').innerText = file.name;
 
     const reader = new FileReader();
     reader.onload = function(event) {
-        if (cropper) { 
-            cropper.destroy(); 
-        }
+        if (cropper) cropper.destroy();
         
         image.src = event.target.result;
 
-        cropper = new Cropper(image, {
-            viewMode: 1,
-            dragMode: 'move',
-            autoCropArea: 1, 
-            restore: false,
-            guides: true,
-            center: true,
-            highlight: false,
-            cropBoxMovable: true,
-            cropBoxResizable: true,
-            toggleDragModeOnDblclick: false,
-            checkOrientation: false,
-            responsive: true,
-        });
+        image.onload = () => {
+            cropper = new Cropper(image, {
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 1,
+                responsive: true,
+                restore: false,
+                checkOrientation: false,
+            });
+        };
     };
     reader.readAsDataURL(file);
 });
 
-function rotateRight() { if (cropper) cropper.rotate(90); }
-function rotateLeft() { if (cropper) cropper.rotate(-90); }
-function setAspectRatio(ratio) { if (cropper) cropper.setAspectRatio(parseFloat(ratio)); }
-
-let flipH = 1, flipV = 1;
-function flipHorizontal() {
-    if (!cropper) return;
-    flipH = (flipH === 1) ? -1 : 1;
-    cropper.scaleX(flipH);
-}
-function flipVertical() {
-    if (!cropper) return;
-    flipV = (flipV === 1) ? -1 : 1;
-    cropper.scaleY(flipV);
-}
-function resetEditor() { if (cropper) cropper.reset(); }
-
 async function cropImage(btn) {
-    if (!cropper)
-        showToast("Please select a file first!","warning");
+    if (!cropper) {
+        showToast("Please upload an image first!", "warning");
         return;
+    }
 
     const fileName = inputImage.files[0].name;
     const extension = fileName.split('.').pop().toLowerCase();
@@ -77,11 +52,9 @@ async function cropImage(btn) {
     }
 
     const overlay = document.getElementById('loadingOverlay');
-    const downloadBtn = btn;
-
     overlay.style.display = 'flex';
-    downloadBtn.disabled = true;
-    downloadBtn.innerText = "Processing...";
+    btn.disabled = true;
+    btn.innerText = "Processing...";
 
     let canvas = cropper.getCroppedCanvas({
         imageSmoothingEnabled: true,
@@ -90,16 +63,15 @@ async function cropImage(btn) {
 
     canvas.toBlob(async (blob) => {
         if (!blob) {
-            showToast("Canvas empty hai!","error");
-            hideLoading(overlay, downloadBtn);
+            showToast("Canvas Error!", "error");
+            hideLoading(overlay, btn);
             return;
         }
 
         let formData = new FormData();
-        formData.append("image", blob, "cropped.jpg");
+        formData.append("image", blob, "edited_image.jpg");
 
         try {
-             
             let res = await fetch(`${window.BACKEND_URL}/crop_rotate`, {
                 method: 'POST',
                 body: formData
@@ -107,16 +79,21 @@ async function cropImage(btn) {
 
             if (res.ok) {
                 let data = await res.json();
-                
-                showToast("Edit successful!", "success");
-                
-                window.location.href = `${window.BACKEND_URL}/download/${data.filename}`;
+                showToast("Success! Starting Download...", "success");
+ 
+                const link = document.createElement('a');
+                link.href = `${window.BACKEND_URL}/download/${data.filename}`;
+                link.download = data.filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
 
             } else {
-                showToast("Server error!","error");
+                showToast("Server Error: Could not save image", "error");
             }
         } catch (error) {
-            showToast("Connection failed", "error");
+            console.error(error);
+            showToast("Connection to Backend Failed", "error");
         } finally {
             setTimeout(() => hideLoading(overlay, btn), 1000);
         }
@@ -126,7 +103,24 @@ async function cropImage(btn) {
 function hideLoading(overlay, btn) {
     overlay.style.display = 'none';
     btn.disabled = false;
-    btn.innerText = "Download";
+    btn.innerHTML = '<i class="fas fa-download me-2"></i> Save & Download';
+}
+ 
+function rotateRight() { if (cropper) cropper.rotate(90); }
+function rotateLeft() { if (cropper) cropper.rotate(-90); }
+function setAspectRatio(ratio) { if (cropper) cropper.setAspectRatio(parseFloat(ratio)); }
+function resetEditor() { if (cropper) cropper.reset(); }
+
+let flipH = 1, flipV = 1;
+function flipHorizontal() {
+    if (!cropper) return;
+    flipH = flipH === 1 ? -1 : 1;
+    cropper.scaleX(flipH);
+}
+function flipVertical() {
+    if (!cropper) return;
+    flipV = flipV === 1 ? -1 : 1;
+    cropper.scaleY(flipV);
 }
 
 // --- Drag & Drop logic ---
