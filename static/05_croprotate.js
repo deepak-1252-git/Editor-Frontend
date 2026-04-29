@@ -6,15 +6,16 @@ const label1 = document.getElementById('filelabel');
 inputImage.addEventListener('change', (e) => {
     const file = e.target.files[0];
     
+    if (!file){
+        showToast("Please  a file first!"); 
+        return;
+    }
+    
     const count = e.target.files.length;
     if (count > 0) {
         label1.querySelector('.custom-file-upload').innerText = e.target.files[0].name;
     }
 
-    if (!file)
-        showToast("Please  a file first!","warning"); 
-        return;
- 
     const reader = new FileReader();
     reader.onload = function(event) {
         if (cropper) { 
@@ -71,7 +72,7 @@ async function cropImage(btn) {
         isValid = true;
     }
     if (!isValid){
-        showToast(`wrong file uploaded "${extension}" `,"warning");
+        showToast(`wrong file format "${extension}" `);
         return;
     }
 
@@ -105,21 +106,19 @@ async function cropImage(btn) {
             });
 
             if (res.ok) {
-                showToast("Edit successful!", "success");
-
                 let data = await res.json();
+                
+                showToast("Edit successful!", "success");
                 
                 window.location.href = `${window.BACKEND_URL}/download/${data.filename}`;
 
-                setTimeout(() => hideLoading(overlay, downloadBtn), 900);
             } else {
                 showToast("Server error!","error");
             }
-
         } catch (error) {
-            console.error("Error:", error);
-            showToast("Could not connect to Backend","error");
-            hideLoading(overlay, downloadBtn);
+            showToast("Connection failed", "error");
+        } finally {
+            setTimeout(() => hideLoading(overlay, btn), 1000);
         }
     }, 'image/jpeg', 0.95);
 }
