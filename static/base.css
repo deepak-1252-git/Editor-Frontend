@@ -50,7 +50,6 @@ nav {
 .nav-logo {
     height: 40px;
     width: auto;
-    border-radius: 1px;
      
 }
 
@@ -64,11 +63,10 @@ nav h1 {
     background: linear-gradient(to right, #f8f6f6, #b1a4a4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
     flex-shrink: 0;
-    /* Logo ko dabne mat do */
 }
 
 .nav-links {
@@ -96,26 +94,6 @@ nav a {
 
 nav a:hover {
     color: white;
-}
-
-/* Mobile responsive fix */
-@media (max-width: 768px) {
-    nav {
-        padding: 0.5rem 10px;
-    }
-
-    nav h1 {
-        font-size: 1rem;
-    }
-
-    .nav-links {
-        gap: 5px;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-        padding: 5px 7px;
-    }
 }
 
 /* -------------------workflow------------------- */
@@ -202,13 +180,6 @@ nav a:hover {
     color: #94a3b8;
     margin: 0;
     font-size: 0.85rem;
-}
-
-@media (max-width: 768px) {
-    .steps-flex {
-        flex-direction: column;
-        align-items: center;
-    }
 }
 
 /*--------------- Footer Styling--------------------- */
@@ -326,5 +297,31 @@ footer {
     & .linkedin:hover {
         color: #0066ff;
         transform: scale(1.2);
+    }
+}
+
+/* Mobile responsive fix */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.5rem 10px;
+    }
+    .nav-logo {
+        height: 40px;
+    }
+    nav h1 {
+        font-size: 1rem;
+    }
+
+    .nav-links {
+        gap: 5px;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+        padding: 5px 7px;
+    }
+    .steps-flex {
+        flex-direction: column;
+        align-items: center;
     }
 }

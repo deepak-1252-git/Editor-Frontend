@@ -38,7 +38,7 @@ function enableUpload(allowedType) {
 
     if (allowedType === 'image') {
         fileInput.accept = "image/*"; 
-        fileLabel.innerText = "Select PNG, JPG, WebP, BMP, GIF Files";  
+        fileLabel.innerText = "Select ( PNG, JPG, WebP, BMP, GIF, JFIF ) Files";  
     } 
     else if (allowedType === 'html') {
         fileInput.accept = ".html";
@@ -64,7 +64,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
 
     let isValid = false;
     if (currentRequiredType === 'image') {
-        if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'].includes(extension)) isValid = true;
+        if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp','jfif'].includes(extension)) isValid = true;
     } else if (currentRequiredType === 'html') {
         if (extension === 'html') isValid = true;
     } else if (currentRequiredType === 'pdf') {
