@@ -48,6 +48,10 @@ function enableUpload(allowedType) {
         fileInput.accept = ".pdf";
         fileLabel.innerText = "Please select .pdf Files";   
     }
+    else if (allowedType === 'docx') {
+        fileInput.accept = ".docx" || ".doc" ;
+        fileLabel.innerText = "Please select .docx Files";   
+    }
 }
 
 document.getElementById('convertForm').onsubmit = async (e) => {
@@ -69,6 +73,8 @@ document.getElementById('convertForm').onsubmit = async (e) => {
         if (extension === 'html') isValid = true;
     } else if (currentRequiredType === 'pdf') {
         if (extension === 'pdf') isValid = true;
+    } else if (currentRequiredType === 'docx') {
+        if (extension === 'docx' || 'doc') isValid = true;
     }
 
     if (!isValid){
