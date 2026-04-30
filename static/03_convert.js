@@ -1,4 +1,4 @@
-let currentRequiredType = ""; // Global variable
+let currentRequiredType = "";  
 const fileInput = document.getElementById('fileInput');
 
 fileInput.onchange = () => {
@@ -13,7 +13,7 @@ document.getElementById('dropZone').addEventListener('click', function(e) {
     const fileInput = document.getElementById('fileInput');
     
     if (this.classList.contains('is-disabled')) {
-        showToast("Please select format first!", "warning");
+        showToast("Please select format first!" );
     } else {
         fileInput.click();
     }
@@ -27,7 +27,7 @@ function enableUpload(allowedType) {
     const fileLabel = document.getElementById('fileLabel');
     const label1 = document.getElementById('fileLabel1');
 
-    fileInput.value = ""; //???
+    fileInput.value = ""; 
     label1.innerText="Select or Drag & Drop another file";
 
     document.getElementById('resultArea').style.display = 'none';
@@ -38,7 +38,7 @@ function enableUpload(allowedType) {
 
     if (allowedType === 'image') {
         fileInput.accept = "image/*"; 
-        fileLabel.innerText = "Select ( PNG, JPG, WebP, BMP, GIF, JFIF ) Files";  
+        fileLabel.innerText = "Select (PNG,JPG,WebP,BMP,GIF,JFIF,SVG) Files";  
     } 
     else if (allowedType === 'html') {
         fileInput.accept = ".html";
@@ -64,7 +64,7 @@ document.getElementById('convertForm').onsubmit = async (e) => {
 
     let isValid = false;
     if (currentRequiredType === 'image') {
-        if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp','jfif'].includes(extension)) isValid = true;
+        if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp','jfif','svg'].includes(extension)) isValid = true;     
     } else if (currentRequiredType === 'html') {
         if (extension === 'html') isValid = true;
     } else if (currentRequiredType === 'pdf') {
