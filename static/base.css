@@ -12,7 +12,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #0f0c29;
     /* Fallback */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(6, 6, 6, .7)), url('./hero_bg.jpg');
+    /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(6, 6, 6, .7)), url('./hero_bg.jpg'); Optional*/
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
