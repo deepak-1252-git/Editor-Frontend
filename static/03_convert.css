@@ -36,21 +36,18 @@
     background: rgba(99, 102, 241, 0.05);
 }
 
-/* Jab box disabled ho */
 .upload-box.is-disabled {
     opacity: 0.5;
     cursor: not-allowed !important;
-    pointer-events: all; /* Click rokne ke liye */
+    pointer-events: all;  
 }
-
-/* Jab box active ho */
+ 
 .upload-box {
     pointer-events: auto;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
-/* Format Grid */
+ 
 .format-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
