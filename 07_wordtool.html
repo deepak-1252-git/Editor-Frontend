@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Word Editor | ToolNOVA</title>
+    
+    
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="icon" type="image/x-icon" href="./static/logo.jpeg">
+    <link rel="stylesheet" href="./static/base.css">
+    <link rel="stylesheet" href="./static/switch.css">
+    <link rel="stylesheet" href="./static/07_wordtool.css"> 
+    <script>
+        window.BACKEND_URL = "https://toolnova-n187.onrender.com";
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./static/logo.jpeg" alt="ToolNOVA Logo" class="nav-logo">
+            <h1>ToolNOVA</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="07_wordtool.html">Word Editor</a>
+            <a href="01_resize.html">Resize</a>
+            <a href="02_compress.html">Compress</a>
+            <a href="03_convert.html">Convert</a>
+            <a href="04_pdftool.html">PDF pro</a>
+            <a href="05_croprotate.html">Img Editor</a>
+            <a href="06_qrcode.html">QR Maker</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+  
+    <div class="word-suite">
+        <div class="toolbar">
+            <button onclick="applyTemplate('letter')">✉️ Letter Template</button>
+            <button onclick="applyTemplate('resume')">📄 Resume Template</button>
+            <input type="file" id="uploadDoc" onchange="importWordFile()" hidden>
+            <button onclick="document.getElementById('uploadDoc').click()">📂 Open Doc</button>
+            <button onclick="saveDocument()">💾 Download Docx</button>
+        </div>
+ 
+        <div id="editor-container"></div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>ToolNOVA</strong>. Made with ❤️ for a better web.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./static/errorFormate.js"></script>
+    <script src="./static/07_wordtool.js"></script>
+</body>
+</html>

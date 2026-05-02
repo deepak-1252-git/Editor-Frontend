@@ -11,7 +11,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #0f0c29;
-    /* Fallback */
     /* background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(6, 6, 6, .7)), url('./hero_bg.jpg'); Optional*/
     background-size: cover;
     background-position: center;
@@ -24,7 +23,7 @@ body {
 /* ---------------Navbar---------------------*/
 nav {
     background: rgba(66, 61, 91, 0.05) !important;
-     
+
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
@@ -44,7 +43,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 10px;
-     
+
 }
 
 .nav-logo {
@@ -73,11 +72,11 @@ nav h1 {
 .nav-links {
     display: flex;
     gap: 10px;
-     
+
     flex-wrap: nowrap;
-     
+
     overflow-x: auto;
-     
+
     padding-left: 10px;
 }
 
@@ -186,7 +185,7 @@ nav a:hover {
 /*--------------- Footer Styling--------------------- */
 footer {
     margin-top: 50px;
-    background: rgba(21, 34, 62, 0.8);  
+    background: rgba(21, 34, 62, 0.8);
     /* Dark Glass Effect */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -306,9 +305,11 @@ footer {
     nav {
         padding: 0.5rem 10px;
     }
+
     .nav-logo {
         height: 40px;
     }
+
     nav h1 {
         font-size: 1rem;
     }
@@ -321,6 +322,7 @@ footer {
         font-size: 0.75rem;
         padding: 5px 7px;
     }
+
     .steps-flex {
         flex-direction: column;
         align-items: center;
