@@ -46,9 +46,9 @@
                 <option value="letter">✉️ Letter Template</option>
                 <option value="resume">📄 Resume Template</option>
             </select>
-            <button onclick="saveDocument()">💾 Download Docx</button>
-            <input type="file" id="uploadDoc" onchange="importWordFile()" hidden>
+            <input type="file" id="uploadDoc" onchange="importWordFile()" accept=".docx" hidden>
             <button onclick="document.getElementById('uploadDoc').click()">📂 Open Doc</button>
+            <button onclick="saveDocument()">💾 Download Docx</button>
         </div>
         <div id="editor-container"></div>
     </div>
