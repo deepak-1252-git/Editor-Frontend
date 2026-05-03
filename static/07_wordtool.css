@@ -7,13 +7,14 @@
 .toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 7px;
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #444;
 }
 
-.toolbar button {
+.toolbar button,select {
+    border-radius: 5px;
     padding: 8px 15px;
     border: none;
     background: #3a3a5a;
@@ -44,6 +45,10 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     color: #333;
     line-height: 1.6;
+ 
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;  
 }
 
 .ql-toolbar.ql-snow {
@@ -59,9 +64,15 @@
     border: none !important;
 }
  
-@media (max-width: 800px) {
-    .toolbar button {
-        font-size: 12px;
+@media (max-width: 768px) {
+    .toolbar button{
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+    .toolbar select{
+        width: 100px;
+        padding: 8px 10px;
+        font-size: 10px;
     }
 
     .ql-editor {

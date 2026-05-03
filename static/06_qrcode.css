@@ -154,8 +154,7 @@
 .qr-btn:active {
     transform: translateY(-1px);
 }
-
-/* Result Area Animation */
+ 
 #resultArea {
     display: none;
     margin-top: 40px;
@@ -248,8 +247,7 @@
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
 }
-
-/* Mobile Responsiveness */
+ 
 @media (max-width: 768px) {
     .main-card {
         padding: 25px;
@@ -257,16 +255,16 @@
 
     .color-selection-box {
         padding: 10px;
-        gap: 10px; /* Elements ke beech thoda gap */
+        gap: 10px; 
     }
 
     .color-circle-wrapper {
-        width: 45px; /* Mobile par thoda chota */
+        width: 45px;  
         height: 45px;
     }
 
     .color-item label {
-        font-size: 0.7rem; /* Chota font mobile ke liye */
+        font-size: 0.7rem;  
     }
 
     .controls-grid {

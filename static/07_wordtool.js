@@ -31,6 +31,15 @@ const templates = {
     resume: "<h1>RESUME</h1><h3>Contact Info</h3><p>Email: example@mail.com | Phone: 123456789</p><h3>Experience</h3><p>[Write Job History]</p>"
 };
 
+ 
+function handleTemplateChange(type) {
+    if (type && templates[type]) {
+        applyTemplate(type);
+        document.getElementById('templateSelect').value = "";
+    }
+}
+
+
 function applyTemplate(type) {
     quill.root.innerHTML = templates[type];
 }
@@ -56,4 +65,4 @@ async function saveDocument() {
     if (data.filename) {
         window.location.href = `${window.BACKEND_URL}/download/${data.filename}`;
     }
-}
+}   
