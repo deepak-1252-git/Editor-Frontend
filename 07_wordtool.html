@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Word Editor | ToolNOVA</title>
-    
-    
+
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="icon" type="image/x-icon" href="./static/logo.jpeg">
     <link rel="stylesheet" href="./static/base.css">
     <link rel="stylesheet" href="./static/switch.css">
-    <link rel="stylesheet" href="./static/07_wordtool.css"> 
-    <script>
-        window.BACKEND_URL = "https://toolnova-n187.onrender.com";
-    </script>
+    <link rel="stylesheet" href="./static/07_wordtool.css">
+
+    <!-- <script>window.BACKEND_URL = "https://toolnova-n187.onrender.com";</script> -->
+    <script>window.BACKEND_URL = "http://127.0.0.1:5000/";</script>
 </head>
+
 <body>
     <nav>
         <div class="logo-container">
@@ -34,23 +37,149 @@
             <a href="04_pdftool.html">PDF pro</a>
             <a href="05_croprotate.html">Img Editor</a>
             <a href="06_qrcode.html">QR Maker</a>
-            <a href="07_wordtool.html">Word Editor</a>
+            <a href="07_wordtool.html" class="active">Word Editor</a>
             <a href="#">About</a>
         </div>
     </nav>
-  
-    <div class="word-suite">
-        <div class="toolbar">
-            <select id="templateSelect" onchange="handleTemplateChange(this.value)">
-                <option value="">✨Templates</option>
-                <option value="letter">✉️ Letter Template</option>
-                <option value="resume">📄 Resume Template</option>
-            </select>
-            <input type="file" id="uploadDoc" onchange="importWordFile()" accept=".docx" hidden>
-            <button onclick="document.getElementById('uploadDoc').click()">📂 Open Doc</button>
-            <button onclick="saveDocument()">💾 Download Docx</button>
+ 
+    <div class="editor-shell">
+        <div class="top-toolbar">
+            <div class="tb-group">
+                <button class="tb-btn" onclick="newDocument()" title="New Document (Ctrl+Alt+N)">
+                    <i class="fa fa-file"></i><span>New</span>
+                </button>
+                <button class="tb-btn" onclick="document.getElementById('uploadDoc').click()" title="Open .docx file">
+                    <i class="fa fa-folder-open"></i><span>Open</span>
+                </button>
+                <input type="file" id="uploadDoc" onchange="importWordFile()" accept=".docx" hidden>
+                <button class="tb-btn accent" onclick="saveDocument()" title="Download as .docx (Ctrl+S)" id="saveBtn">
+                    <i class="fa fa-download"></i><span>Download</span>
+                </button>
+                <button class="tb-btn" onclick="printDocument()" title="Print (Ctrl+P)">
+                    <i class="fa fa-print"></i><span>Print</span>
+                </button>
+            </div>
+
+            <div class="tb-divider"></div>
+ 
+            <div class="tb-group">
+                <div class="tb-dropdown-wrap">
+                    <button class="tb-btn" onclick="toggleTemplateMenu()">
+                        <i class="fa fa-magic"></i><span>Templates</span><i class="fa fa-chevron-down"
+                            style="font-size:10px;margin-left:4px"></i>
+                    </button>
+                    <div class="tb-dropdown" id="templateMenu">
+                        <div class="tb-dropdown-item" onclick="applyTemplate('letter')">✉️ Official Letter</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('resume')">📄 Resume / CV</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('invoice')">🧾 Invoice</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('report')">📊 Business Report</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('meeting')">📋 Meeting Notes</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('coverletter')">💼 Cover Letter</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tb-divider"></div>
+ 
+            <div class="tb-group">
+                <button class="tb-btn" onclick="openFindReplace()" title="Find & Replace (Ctrl+H)">
+                    <i class="fa fa-search"></i><span>Find</span>
+                </button>
+                <button class="tb-btn" onclick="insertTable()" title="Insert Table">
+                    <i class="fa fa-table"></i><span>Table</span>
+                </button>
+                <button class="tb-btn" onclick="insertPageBreak()" title="Insert Page Break">
+                    <i class="fa fa-file-alt"></i><span>Page Break</span>
+                </button>
+            </div>
+
+            <div class="tb-divider"></div>
+ 
+            <div class="tb-group">
+                <button class="tb-btn icon-only" onclick="zoomOut()" title="Zoom Out">
+                    <i class="fa fa-search-minus"></i>
+                </button>
+                <span class="zoom-display" id="zoomDisplay">100%</span>
+                <button class="tb-btn icon-only" onclick="zoomIn()" title="Zoom In">
+                    <i class="fa fa-search-plus"></i>
+                </button>
+                <button class="tb-btn icon-only" onclick="resetZoom()" title="Reset Zoom">
+                    <i class="fa fa-compress-arrows-alt"></i>
+                </button>
+                <button class="tb-btn icon-only" id="orientBtn" onclick="toggleOrientation()"
+                    title="Toggle Landscape/Portrait">
+                    <i class="fa fa-file"></i>
+                </button>
+            </div>
+ 
+            <div class="autosave-indicator" id="autosaveIndicator">
+                <i class="fa fa-circle-notch fa-spin" id="autosaveSpinner" style="display:none"></i>
+                <span id="autosaveText">Auto-saved</span>
+            </div>
         </div>
+ 
         <div id="editor-container"></div>
+ 
+        <div class="status-bar">
+            <div class="status-left">
+                <span><i class="fa fa-file-word"></i> Word Editor</span>
+                <span class="status-sep">|</span>
+                <span id="statusPage">Page 1</span>
+                <span class="status-sep">|</span>
+                <span id="statusOrientation">Portrait</span>
+            </div>
+            <div class="status-right">
+                <span id="wordCount"><i class="fa fa-font"></i> 0 words</span>
+                <span class="status-sep">|</span>
+                <span id="charCount">0 chars</span>
+                <span class="status-sep">|</span>
+                <span id="selectedCount" style="display:none">0 selected</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="findReplaceModal" onclick="closeFindReplace(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span><i class="fa fa-search"></i> Find & Replace</span>
+                <button class="modal-close" onclick="closeFindReplace()"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-field">
+                    <label>Find</label>
+                    <div class="modal-input-row">
+                        <input type="text" id="findInput" placeholder="Search text..." onkeyup="highlightFind()">
+                        <button onclick="findNext()">Next</button>
+                        <button onclick="findPrev()">Prev</button>
+                    </div>
+                    <div class="find-count" id="findCount"></div>
+                </div>
+                <div class="modal-field">
+                    <label>Replace with</label>
+                    <div class="modal-input-row">
+                        <input type="text" id="replaceInput" placeholder="Replace text...">
+                        <button onclick="replaceNext()">Replace</button>
+                        <button class="accent-btn" onclick="replaceAll()">Replace All</button>
+                    </div>
+                </div>
+                <label class="modal-checkbox">
+                    <input type="checkbox" id="caseSensitive"> Case-sensitive
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="tableModal" onclick="closeTableModal(event)">
+        <div class="modal-box small" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span><i class="fa fa-table"></i> Insert Table</span>
+                <button class="modal-close" onclick="closeTableModal()"><i class="fa fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-grid" id="tableGrid"></div>
+                <div class="table-grid-label" id="tableGridLabel">Select size</div>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -60,10 +189,11 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./static/errorFormate.js"></script>
     <script src="./static/07_wordtool.js"></script>
 </body>
+
 </html>

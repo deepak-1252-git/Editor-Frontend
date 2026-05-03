@@ -1,26 +1,10 @@
- function showToast(message, type = "info") {
-    let bgColor = "rgb(255, 255, 255)";  
-    
-    if (type === "success") bgColor = "rgb(253, 247, 247)";
-    if (type === "error") bgColor = "rgb(255, 255, 255)";   
-    if (type === "warning") bgColor = "rgb(255, 255, 255)";   
-
+function showToast(msg, type = 'info') {
+    const bg = { success: '#22c55e', error: '#ef4444', info: '#3b82f6', warning: '#f59e0b' };
     Toastify({
-        text: message,
-        duration: 3500,
-        // close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true, 
-         
-        style: {
-            background: bgColor,
-            backdropFilter: "blur(12px)",
-            webkitBackdropFilter: "blur(12px)",
-            border: "4px solid rgba(26, 25, 25, 0.25)",
-            borderRadius: "10px",
-            color: "#000000",
-            fontSize: "15px",
-        },
+        text: msg,
+        duration: 3000,
+        gravity: 'bottom',
+        position: 'right',
+        style: { background: bg[type] || bg.info, borderRadius: '8px', fontFamily: 'DM Sans, sans-serif', fontSize: '14px' }
     }).showToast();
 }
