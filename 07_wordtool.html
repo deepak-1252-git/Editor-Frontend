@@ -13,16 +13,18 @@
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="icon" type="image/x-icon" href="./static/logo.jpeg">
     <link rel="stylesheet" href="./static/base.css">
     <link rel="stylesheet" href="./static/switch.css">
     <link rel="stylesheet" href="./static/07_wordtool.css">
 
-    <script>window.BACKEND_URL = "https://toolnova-n187.onrender.com";</script>
+    <!-- <script>window.BACKEND_URL = "https://toolnova-n187.onrender.com";</script> -->
+    <script>window.BACKEND_URL = "http://127.0.0.1:5000";</script>
 </head>
 
 <body>
+
+    <!-- ── NAV ───────────────────────────────────────────────────────────────────── -->
     <nav>
         <div class="logo-container">
             <img src="./static/logo.jpeg" alt="ToolNOVA Logo" class="nav-logo">
@@ -40,18 +42,23 @@
             <a href="#">About</a>
         </div>
     </nav>
- 
+
+    <!-- ── EDITOR SHELL ──────────────────────────────────────────────────────────── -->
     <div class="editor-shell">
+
+        <!-- TOP TOOLBAR -->
         <div class="top-toolbar">
+
+            <!-- File group -->
             <div class="tb-group">
-                <button class="tb-btn" onclick="newDocument()" title="New Document (Ctrl+Alt+N)">
+                <button class="tb-btn" onclick="newDocument()" title="New (Ctrl+Alt+N)">
                     <i class="fa fa-file"></i><span>New</span>
                 </button>
-                <button class="tb-btn" onclick="document.getElementById('uploadDoc').click()" title="Open .docx file">
+                <button class="tb-btn" onclick="document.getElementById('uploadDoc').click()" title="Open .docx">
                     <i class="fa fa-folder-open"></i><span>Open</span>
                 </button>
-                <input type="file" id="uploadDoc" onchange="importWordFile()" accept=".docx" hidden>
-                <button class="tb-btn accent" onclick="saveDocument()" title="Download as .docx (Ctrl+S)" id="saveBtn">
+                <input type="file" id="uploadDoc" accept=".docx" onchange="importWordFile()" hidden>
+                <button class="tb-btn accent" id="saveBtn" onclick="saveDocument()" title="Download .docx (Ctrl+S)">
                     <i class="fa fa-download"></i><span>Download</span>
                 </button>
                 <button class="tb-btn" onclick="printDocument()" title="Print (Ctrl+P)">
@@ -60,70 +67,78 @@
             </div>
 
             <div class="tb-divider"></div>
- 
+
+            <!-- Templates group -->
             <div class="tb-group">
                 <div class="tb-dropdown-wrap">
                     <button class="tb-btn" onclick="toggleTemplateMenu()">
-                        <i class="fa fa-magic"></i><span>Templates</span><i class="fa fa-chevron-down"
-                            style="font-size:10px;margin-left:4px"></i>
+                        <i class="fa fa-magic"></i><span>Templates</span>
+                        <i class="fa fa-chevron-down" style="font-size:9px;margin-left:2px;opacity:.7"></i>
                     </button>
                     <div class="tb-dropdown" id="templateMenu">
                         <div class="tb-dropdown-item" onclick="applyTemplate('letter')">✉️ Official Letter</div>
                         <div class="tb-dropdown-item" onclick="applyTemplate('resume')">📄 Resume / CV</div>
                         <div class="tb-dropdown-item" onclick="applyTemplate('invoice')">🧾 Invoice</div>
                         <div class="tb-dropdown-item" onclick="applyTemplate('report')">📊 Business Report</div>
-                        <div class="tb-dropdown-item" onclick="applyTemplate('meeting')">📋 Meeting Notes</div>
+                        <div class="tb-dropdown-item" onclick="applyTemplate('meeting')">📋 Meeting Minutes</div>
                         <div class="tb-dropdown-item" onclick="applyTemplate('coverletter')">💼 Cover Letter</div>
                     </div>
                 </div>
             </div>
 
             <div class="tb-divider"></div>
- 
+
+            <!-- Edit group -->
             <div class="tb-group">
+                <!-- ✅ FIX: onclick calls openFindReplace() correctly -->
                 <button class="tb-btn" onclick="openFindReplace()" title="Find & Replace (Ctrl+H)">
                     <i class="fa fa-search"></i><span>Find</span>
                 </button>
+                <!-- ✅ FIX: onclick calls insertTable() correctly -->
                 <button class="tb-btn" onclick="insertTable()" title="Insert Table">
                     <i class="fa fa-table"></i><span>Table</span>
                 </button>
-                <button class="tb-btn" onclick="insertPageBreak()" title="Insert Page Break">
+                <button class="tb-btn" onclick="insertPageBreak()" title="Page Break">
                     <i class="fa fa-file-alt"></i><span>Page Break</span>
                 </button>
             </div>
 
             <div class="tb-divider"></div>
- 
+
+            <!-- View group -->
             <div class="tb-group">
-                <button class="tb-btn icon-only" onclick="zoomOut()" title="Zoom Out">
+                <button class="tb-btn icon-only" onclick="zoomOut()" title="Zoom Out (Ctrl+-)">
                     <i class="fa fa-search-minus"></i>
                 </button>
                 <span class="zoom-display" id="zoomDisplay">100%</span>
-                <button class="tb-btn icon-only" onclick="zoomIn()" title="Zoom In">
+                <button class="tb-btn icon-only" onclick="zoomIn()" title="Zoom In (Ctrl+=)">
                     <i class="fa fa-search-plus"></i>
                 </button>
-                <button class="tb-btn icon-only" onclick="resetZoom()" title="Reset Zoom">
+                <button class="tb-btn icon-only" onclick="resetZoom()" title="Reset Zoom (Ctrl+0)">
                     <i class="fa fa-compress-arrows-alt"></i>
                 </button>
                 <button class="tb-btn icon-only" id="orientBtn" onclick="toggleOrientation()"
-                    title="Toggle Landscape/Portrait">
+                    title="Toggle Portrait/Landscape">
                     <i class="fa fa-file"></i>
                 </button>
             </div>
- 
+
+            <!-- Auto-save status (pushed right) -->
             <div class="autosave-indicator" id="autosaveIndicator">
                 <i class="fa fa-circle-notch fa-spin" id="autosaveSpinner" style="display:none"></i>
                 <span id="autosaveText">Auto-saved</span>
             </div>
         </div>
- 
+
+        <!-- QUILL EDITOR -->
         <div id="editor-container"></div>
- 
+
+        <!-- STATUS BAR -->
         <div class="status-bar">
             <div class="status-left">
-                <span><i class="fa fa-file-word"></i> Word Editor</span>
+                <span><i class="fa fa-file-word" style="color:#2563eb"></i> Word Editor</span>
                 <span class="status-sep">|</span>
-                <span id="statusPage">Page 1</span>
+                <span id="statusPage">~1 page</span>
                 <span class="status-sep">|</span>
                 <span id="statusOrientation">Portrait</span>
             </div>
@@ -131,52 +146,74 @@
                 <span id="wordCount"><i class="fa fa-font"></i> 0 words</span>
                 <span class="status-sep">|</span>
                 <span id="charCount">0 chars</span>
-                <span class="status-sep">|</span>
-                <span id="selectedCount" style="display:none">0 selected</span>
+                <span class="status-sep" id="selSep" style="display:none">|</span>
+                <span id="statusSel" style="display:none"></span>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="findReplaceModal" onclick="closeFindReplace(event)">
+    <!-- ═══════════════════════════════════════════════════════════════════════════
+     FIND & REPLACE MODAL  ✅ FIXED event bindings
+═══════════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="findReplaceModal">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <span><i class="fa fa-search"></i> Find & Replace</span>
-                <button class="modal-close" onclick="closeFindReplace()"><i class="fa fa-times"></i></button>
+                <span><i class="fa fa-search"></i> Find &amp; Replace</span>
+                <!-- ✅ FIX: calls closeFindReplace() which clears highlights -->
+                <button class="modal-close" onclick="closeFindReplace()" title="Close (Esc)">
+                    <i class="fa fa-times"></i>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="modal-field">
                     <label>Find</label>
                     <div class="modal-input-row">
-                        <input type="text" id="findInput" placeholder="Search text..." onkeyup="highlightFind()">
-                        <button onclick="findNext()">Next</button>
-                        <button onclick="findPrev()">Prev</button>
+                        <!-- ✅ FIX: oninput uses onFindInput() for debounced search -->
+                        <input type="text" id="findInput" placeholder="Search text…" oninput="onFindInput()"
+                            onkeydown="if(event.key==='Enter'){event.preventDefault();findNext();}">
+                        <button onclick="findPrev()" title="Previous match">◀ Prev</button>
+                        <button onclick="findNext()" title="Next match (Enter)">Next ▶</button>
                     </div>
                     <div class="find-count" id="findCount"></div>
                 </div>
+
                 <div class="modal-field">
-                    <label>Replace with</label>
+                    <label>Replace With</label>
                     <div class="modal-input-row">
-                        <input type="text" id="replaceInput" placeholder="Replace text...">
-                        <button onclick="replaceNext()">Replace</button>
+                        <input type="text" id="replaceInput" placeholder="Replacement text…"
+                            onkeydown="if(event.key==='Enter'){event.preventDefault();replaceCurrent();}">
+                        <!-- ✅ FIX: calls replaceCurrent() not replaceNext() -->
+                        <button onclick="replaceCurrent()">Replace</button>
                         <button class="accent-btn" onclick="replaceAll()">Replace All</button>
                     </div>
                 </div>
+
                 <label class="modal-checkbox">
-                    <input type="checkbox" id="caseSensitive"> Case-sensitive
+                    <input type="checkbox" id="caseSensitive" onchange="runFind()">
+                    Case-sensitive search
                 </label>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="tableModal" onclick="closeTableModal(event)">
+    <!-- ═══════════════════════════════════════════════════════════════════════════
+     TABLE INSERT MODAL  ✅ FIXED event bindings + grid hover logic
+═══════════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="tableModal">
         <div class="modal-box small" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <span><i class="fa fa-table"></i> Insert Table</span>
-                <button class="modal-close" onclick="closeTableModal()"><i class="fa fa-times"></i></button>
+                <!-- ✅ FIX: calls closeTableModal() -->
+                <button class="modal-close" onclick="closeTableModal()" title="Close (Esc)">
+                    <i class="fa fa-times"></i>
+                </button>
             </div>
             <div class="modal-body">
-                <div class="table-grid" id="tableGrid"></div>
-                <div class="table-grid-label" id="tableGridLabel">Select size</div>
+                <!-- Grid is built by JS buildTableGrid() on load -->
+                <div class="table-grid" id="tableGrid"
+                    onmouseleave="document.getElementById('tableGridLabel').textContent='Hover to select size'">
+                </div>
+                <div class="table-grid-label" id="tableGridLabel">Hover to select size</div>
             </div>
         </div>
     </div>
