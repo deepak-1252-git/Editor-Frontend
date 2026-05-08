@@ -100,6 +100,11 @@ Frontend/
   <img src="screenshots/qrmaker.png" width="80%" />
 </p>
 
+### 📝 Word editor
+<p align="center">
+  <img src="screenshots/wordeditor.png" width="80%" />
+</p>
+
 ### ✅ Contact
 <p align="center">
   <img src="screenshots/contact.png" width="80%" />
